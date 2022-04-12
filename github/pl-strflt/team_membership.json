@@ -1,7 +1,10 @@
 {
   "ipdx": {
     "galargh": {
-       "role": "member"
+      "role": "maintainer"
+    },
+    "laurentsenta": {
+      "role": "maintainer"
     }
   }
 }
