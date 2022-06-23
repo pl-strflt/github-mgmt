@@ -1,6 +1,9 @@
 output "github_team" {
   value = [
-    for team in data.github_organization_teams.this.teams : team.id
+    for team in data.github_organization_teams.this.teams : {
+      id: team.id
+      index: team.name
+    }
   ]
 }
 
@@ -12,7 +15,10 @@ output "github_team_repository" {
   value = flatten([
     for team in data.github_organization_teams.this.teams :
     [
-      for repository in team.repositories : "${team.id}:${repository}"
+      for repository in team.repositories : {
+        id: "${team.id}:${repository}"
+        index: "${team.name}:${repository}"
+      }
     ]
   ])
 }
@@ -21,14 +27,20 @@ output "github_team_membership" {
   value = flatten([
     for team in data.github_organization_teams.this.teams :
     [
-      for member in team.members : "${team.id}:${member}"
+      for member in team.members : {
+        id: "${team.id}:${member}"
+        index: "${team.name}:${member}"
+      }
     ]
   ])
 }
 
 output "github_membership" {
   value = [
-    for member in data.github_organization.this.members : "${local.organization}:${member}"
+    for member in data.github_organization.this.members : {
+      id: "${local.organization}:${member}"
+      index: "${member}"
+    }
   ]
 }
 
@@ -62,7 +74,10 @@ output "github_repository_file" {
         file => merge({
           branch = lookup(config, "branch", data.github_repository.this[repository].default_branch)
         }, config) if contains(keys(data.github_repository.this), repository)
-      } : "${repository}/${file}:${config.branch}" if contains(keys(data.github_tree.this), "${repository}:${config.branch}") ? contains(data.github_tree.this["${repository}:${config.branch}"].entries.*.path, file) : false
+      } : {
+        id: "${repository}/${file}:${config.branch}"
+        index: "${repository}/${file}"
+      } if contains(keys(data.github_tree.this), "${repository}:${config.branch}") ? contains(data.github_tree.this["${repository}:${config.branch}"].entries.*.path, file) : false
     ]
   ])
 }

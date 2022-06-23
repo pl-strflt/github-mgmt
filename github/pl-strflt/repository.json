@@ -1,9 +1,0 @@
-{
-  "github-action-releaser": {},
-  "github-mgmt": {},
-  "ipdx": {},
-  "projects-migration": {},
-  "projects-status-history": {},
-  "rust-sccache-action": {},
-  "tf-aws-gh-runner": {}
-}

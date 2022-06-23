@@ -1,36 +1,26 @@
 resource "github_membership" "this" {
-  for_each = merge([
-    for group, members in lookup(local.config, "members", {}) : {
-      for member in members : "${local.organization}:${member}" => {
+  for_each = contains(local.resource_types, "github_membership") ? merge([
+    for role, members in lookup(local.config, "members", {}) : {
+      for member in members : "${member}" => {
         username = member
-        role = (
-          group == "admins" ? "admin" : (
-            group == "members" ? "member" : (
-              null
-            )
-          )
-        )
+        role = role
       }
     }
-  ]...)
+  ]...) : {}
 
   username = each.value.username
   role = each.value.role
 
   lifecycle {
-    ignore_changes = [
-      etag,
-      id,
-      role
-    ]
+    ignore_changes = []
   }
 }
 
 resource "github_repository" "this" {
   for_each = {
-    for repository, config in lookup(local.config, "repositories", {}) : repository => merge({
+    for repository, config in lookup(local.config, "repositories", {}) : repository => merge(config, {
       name = repository
-    }, config)
+    })
   }
 
   name = each.value.name
@@ -65,33 +55,18 @@ resource "github_repository" "this" {
       archive_on_destroy,
       archived,
       auto_init,
-      branches,
-      default_branch,
       delete_branch_on_merge,
       description,
-      etag,
-      full_name,
-      git_clone_url,
       gitignore_template,
       has_downloads,
       has_issues,
       has_projects,
       has_wiki,
       homepage_url,
-      html_url,
-      http_clone_url,
-      id,
       ignore_vulnerability_alerts_during_read,
       is_template,
       license_template,
-      node_id,
       pages,
-      pages[0].cname,
-      pages[0].source[0].path,
-      private,
-      repo_id,
-      ssh_clone_url,
-      svn_url,
       template,
       topics,
       visibility,
@@ -101,30 +76,18 @@ resource "github_repository" "this" {
 }
 
 resource "github_repository_collaborator" "this" {
-  for_each = merge([
+  for_each = contains(local.resource_types, "github_repository_collaborator") ? merge(flatten([
     for repository, repository_config in lookup(local.config, "repositories", {}) :
     [
-      for group, members in lookup(repository_config, "collaborators", {}) : {
+      for permission, members in lookup(repository_config, "collaborators", {}) : {
         for member in members : "${repository}:${member}" => {
           repository = repository
           username = member
-          permission = (
-            group == "admins" ? "admin" : (
-              group == "maintainers" ? "maintain" : (
-                group == "writers" ? "push" : (
-                  group == "triagers" ? "triage" : (
-                    group == "readers" ? "pull" : (
-                      null
-                    )
-                  )
-                )
-              )
-            )
-          )
+          permission = permission
         }
       }
     ]
-  ]...)
+  ])...) : {}
 
   depends_on = [github_repository.this]
 
@@ -133,25 +96,20 @@ resource "github_repository_collaborator" "this" {
   permission                  = each.value.permission
 
   lifecycle {
-    ignore_changes = [
-      id,
-      invitation_id,
-      permission,
-      permission_diff_suppression
-    ]
+    ignore_changes = []
   }
 }
 
 resource "github_branch_protection" "this" {
-  for_each = merge([
+  for_each = contains(local.resource_types, "github_branch_protection") ? merge([
     for repository, repository_config in lookup(local.config, "repositories", {}) :
     {
-      for pattern, config in lookup(repository_config, "branch_protection", {}) : "${repository}:${pattern}" => merge({
+      for pattern, config in lookup(repository_config, "branch_protection", {}) : "${repository}:${pattern}" => merge(config, {
         pattern = pattern
         repository_id = github_repository.this[repository].node_id
-      }, config)
+      })
     }
-  ]...)
+  ]...) : {}
 
   pattern = each.value.pattern
   repository_id = each.value.repository_id
@@ -186,31 +144,23 @@ resource "github_branch_protection" "this" {
       allows_deletions,
       allows_force_pushes,
       enforce_admins,
-      id,
       push_restrictions,
       require_conversation_resolution,
       require_signed_commits,
       required_linear_history,
       required_pull_request_reviews,
-      required_pull_request_reviews[0].dismiss_stale_reviews,
-      required_pull_request_reviews[0].dismissal_restrictions,
-      required_pull_request_reviews[0].require_code_owner_reviews,
-      required_pull_request_reviews[0].required_approving_review_count,
-      required_pull_request_reviews[0].restrict_dismissals,
-      required_status_checks,
-      required_status_checks[0].contexts,
-      required_status_checks[0].strict
+      required_status_checks
     ]
   }
 }
 
 resource "github_team" "this" {
-  for_each = {
-    for team, config in lookup(local.github, "team", {}): team => merge({
+  for_each = contains(local.resource_types, "github_team") ? {
+    for team, config in lookup(local.config, "teams", {}): team => merge(config, {
       name = team
       parent_team_id = try(try(element(data.github_organization_teams.this, index(data.github_organization_teams.this.*.id, config.parent_team_id)), config.parent_team_id), null)
-    }, config)
-  }
+    })
+  } : {}
 
   name = each.value.name
   create_default_maintainer = try(each.value.create_default_maintainer, null)
@@ -221,45 +171,27 @@ resource "github_team" "this" {
 
   lifecycle {
     ignore_changes = [
-      id,
       create_default_maintainer,
       description,
-      etag,
-      ldap_dn,
-      members_count,
-      node_id,
       parent_team_id,
       privacy,
-      slug
     ]
   }
 }
 
 resource "github_team_repository" "this" {
-  for_each = merge([
+  for_each = contains(local.resource_types, "github_team_repository") ? merge(flatten([
     for repository, repository_config in lookup(local.config, "repositories", {}) :
     [
-      for group, teams in lookup(repository_config, "teams", {}) : {
-        for team in teams : "${repository}:${team}" => {
+      for permission, teams in lookup(repository_config, "teams", {}) : {
+        for team in teams : "${team}:${repository}" => {
           repository = repository
           team_id = github_team.this[team].id
-          permission = (
-            group == "admins" ? "admin" : (
-              group == "maintainers" ? "maintain" : (
-                group == "writers" ? "push" : (
-                  group == "triagers" ? "triage" : (
-                    group == "readers" ? "pull" : (
-                      null
-                    )
-                  )
-                )
-              )
-            )
-          )
+          permission = permission
         }
       }
     ]
-  ]...)
+  ])...) : {}
 
   depends_on = [
     github_repository.this
@@ -271,61 +203,47 @@ resource "github_team_repository" "this" {
   permission = try(each.value.permission, null)
 
   lifecycle {
-    ignore_changes = [
-      etag,
-      id,
-      permission
-    ]
+    ignore_changes = []
   }
 }
 
 resource "github_team_membership" "this" {
-  for_each = merge([
+  for_each = contains(local.resource_types, "github_team_membership") ? merge(flatten([
     for team, team_config in lookup(local.config, "teams", {}) :
     [
-      for group, members in lookup(team_config, "members", {}) : {
+      for role, members in lookup(team_config, "members", {}) : {
         for member in members : "${team}:${member}" => {
           team_id = github_team.this[team].id
           username = member
-          role = (
-            group == "maintainers" ? "maintainer" : (
-              group == "members" ? "member" : (
-                null
-              )
-            )
-          )
+          role = role
         }
       }
     ]
-  ]...)
+  ])...) : {}
 
   team_id = each.value.team_id
   username = each.value.username
   role = each.value.role
 
   lifecycle {
-    ignore_changes = [
-      etag,
-      id,
-      role
-    ]
+    ignore_changes = []
   }
 }
 
 resource "github_repository_file" "this" {
-  for_each = merge([
+  for_each = contains(local.resource_types, "github_repository_file") ? merge([
     for repository, repository_config in lookup(local.config, "repositories", {}) :
     {
       for config in [
-        for file, config in lookup(repository_config, "files", {}) : merge({
+        for file, config in lookup(repository_config, "files", {}) : merge(config, {
           repository = repository
           file = file
-          branch = try(each.value.branch, github_repository.this[each.value.repository].default_branch)
-          content = try(file("${path.module}/../files/${each.value.content}"), each.value.content)
-        }, config)
-      ]: "${config.repository}/${config.file}:${config.branch}" => config
+          branch = try(config.branch, github_repository.this[repository].default_branch)
+          content = try(file("${path.module}/../files/${config.content}"), config.content)
+        }) if contains(keys(config), "content")
+      ]: "${config.repository}/${config.file}" => config
     }
-  ]...)
+  ]...) : {}
 
   repository = each.value.repository
   file = each.value.file
@@ -338,14 +256,10 @@ resource "github_repository_file" "this" {
 
   lifecycle {
     ignore_changes = [
-      id,
-      branch,
       commit_author,
       commit_email,
       commit_message,
-      commit_sha,
       overwrite_on_create,
-      sha
     ]
   }
 }

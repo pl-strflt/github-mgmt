@@ -1,0 +1,196 @@
+# yaml-language-server: $schema=../scripts/schema.json
+
+members:
+  admin:
+    - galargh
+    - laurentsenta
+repositories:
+  github-action-releaser:
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    description: Release steps for github actions.
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    visibility: public
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    delete_branch_on_merge: false
+    homepage_url: ""
+    is_template: false
+    vulnerability_alerts: false
+    topics: []
+  github-mgmt:
+    branch_protection:
+      master:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
+        push_restrictions: []
+        required_pull_request_reviews:
+          dismiss_stale_reviews: false
+          dismissal_restrictions: []
+          pull_request_bypassers: []
+          require_code_owner_reviews: false
+          required_approving_review_count: 1
+          restrict_dismissals: false
+        required_status_checks:
+          contexts:
+            - Plan
+          strict: true
+    files:
+      "README.md":
+        content: README.md
+        branch: master
+        commit_author: galargh
+        commit_email: piotr.galar@gmail.com
+        commit_message: Update README
+        overwrite_on_create: false
+    teams:
+      triage:
+        - ipdx
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    delete_branch_on_merge: true
+    has_downloads: true
+    has_issues: true
+    visibility: public
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    description: ""
+    has_projects: false
+    has_wiki: false
+    homepage_url: ""
+    is_template: false
+    vulnerability_alerts: false
+    template:
+      owner: protocol
+      repository: github-mgmt-template
+    topics: []
+  ipdx:
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    visibility: public
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    delete_branch_on_merge: false
+    description: ""
+    homepage_url: ""
+    is_template: false
+    vulnerability_alerts: false
+    topics: []
+  projects-migration:
+    collaborators:
+      push: []
+      admin:
+        - galargh
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    visibility: public
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    delete_branch_on_merge: false
+    description: ""
+    homepage_url: ""
+    is_template: false
+    vulnerability_alerts: false
+    pages:
+      cname: ""
+      source:
+        branch: main
+        path: /docs
+    topics:
+      - github
+      - graphql
+  projects-status-history:
+    collaborators:
+      admin:
+        - galargh
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    visibility: public
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    delete_branch_on_merge: false
+    description: ""
+    homepage_url: ""
+    is_template: false
+    vulnerability_alerts: false
+    topics: []
+  rust-sccache-action:
+    collaborators:
+      admin:
+        - galargh
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    visibility: public
+    vulnerability_alerts: true
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    delete_branch_on_merge: false
+    description: ""
+    homepage_url: ""
+    is_template: false
+    topics: []
+  tf-aws-gh-runner:
+    teams:
+      maintain:
+        - ipdx
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    visibility: public
+    allow_auto_merge: false
+    archived: false
+    auto_init: false
+    delete_branch_on_merge: false
+    description: ""
+    homepage_url: ""
+    is_template: false
+    vulnerability_alerts: false
+    topics: []
+teams:
+  ipdx:
+    members:
+      member: []
+      maintainer:
+        - galargh
+        - laurentsenta # comment?
+    privacy: closed
+    description: ""
