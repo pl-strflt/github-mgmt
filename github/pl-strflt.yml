@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../scripts/schema.json
+# yaml-language-server: $schema=.schema.json
 
 members:
   admin:
