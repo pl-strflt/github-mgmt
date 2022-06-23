@@ -10,10 +10,6 @@ on:
         description: Whether to acquire terraform state lock during sync
         required: false
         default: "true"
-      debug:
-        description: Print out all the commands being executed
-        required: false
-        default: "false"
 
 jobs:
   prepare:
@@ -51,7 +47,6 @@ jobs:
       TF_IN_AUTOMATION: 1
       TF_INPUT: 0
       TF_LOCK: ${{ github.event.inputs.lock }}
-      TF_DEBUG: ${{ github.event.inputs.debug }}
       AWS_ACCESS_KEY_ID: ${{ secrets.RW_AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.RW_AWS_SECRET_ACCESS_KEY }}
       GITHUB_APP_ID: ${{ secrets.RW_GITHUB_APP_ID }}
