@@ -78,7 +78,10 @@ jobs:
           echo 'TF_WORKSPACE=${{ matrix.workspace }}' >> $GITHUB_ENV
         working-directory: terraform
       - name: Sync
-        run: ./scripts/sync.sh
+        run: |
+          npm install
+          npm run sync
+        working-directory: scripts
       - uses: ./.github/actions/git-config-user
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
