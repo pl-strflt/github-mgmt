@@ -5,7 +5,10 @@ members:
     - galargh
     - laurentsenta
 repositories:
-  github-action-releaser: {}
+  github-action-releaser:
+    teams:
+      maintain:
+        - ipdx
   github-mgmt:
     teams:
       triage:
@@ -14,9 +17,18 @@ repositories:
     teams:
       admin:
         - ipdx
-  projects-migration: {}
-  projects-status-history: {}
-  rust-sccache-action: {}
+  projects-migration:
+    teams:
+      maintain:
+        - ipdx
+  projects-status-history:
+    teams:
+      maintain:
+        - ipdx
+  rust-sccache-action:
+    teams:
+      maintain:
+        - ipdx
   tf-aws-gh-runner:
     teams:
       maintain:
