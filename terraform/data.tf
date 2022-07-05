@@ -27,7 +27,7 @@ data "github_repository" "this" {
     toset(["github_branch_protection", "github_repository_file"]),
     toset(local.resource_types)
   )) == 0 ? toset([]) : toset(data.github_repositories.this[0].names)
-  name     = each.value
+  name = each.value
 }
 
 data "github_organization_teams" "this" {
