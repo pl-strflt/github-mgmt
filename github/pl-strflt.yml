@@ -12,11 +12,19 @@ repositories:
         - ipdx
   ipdx:
     teams:
+      admin: []
+  projects-migration:
+    collaborators:
       admin:
-        - ipdx
-  projects-migration: {}
-  projects-status-history: {}
-  rust-sccache-action: {}
+        - galargh
+  projects-status-history:
+    collaborators:
+      admin:
+        - galargh
+  rust-sccache-action:
+    collaborators:
+      admin:
+        - galargh
   tf-aws-gh-runner:
     teams:
       maintain:
