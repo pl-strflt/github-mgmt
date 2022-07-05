@@ -24,10 +24,10 @@ class Resource {
     console.log(`Importing ${JSON.stringify(this)}`)
     if (env.TF_EXEC) {
       await cli.exec(
-        `terraform import -lock=${env.TF_LOCK} "${this.address.replaceAll(
+        `terraform import -lock=${env.TF_LOCK} "${this.address.toString().replaceAll(
           '"',
           '\\"'
-        )}" "${this.values.id.replaceAll('"', '\\"')}"`,
+        )}" "${this.values.id.toString().replaceAll('"', '\\"')}"`,
         undefined,
         {cwd: env.TF_WORKING_DIR}
       )
@@ -38,7 +38,7 @@ class Resource {
     console.log(`Removing ${JSON.stringify(this)}`)
     if (env.TF_EXEC) {
       await cli.exec(
-        `terraform state rm -lock=${env.TF_LOCK} "${this.address.replaceAll(
+        `terraform state rm -lock=${env.TF_LOCK} "${this.address.toString().replaceAll(
           '"',
           '\\"'
         )}"`,
