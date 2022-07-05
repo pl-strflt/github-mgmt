@@ -69,8 +69,6 @@ class DesiredResource extends Resource {
   }
 }
 
-class NullResource extends Resource {}
-
 class GithubMembership extends ManagedResource {
   static yamlPath = ['members', '.+']
   override values!: Identifiable & {
@@ -400,9 +398,7 @@ export const DataResources = [
 class Module {
   @Transform(({value, options}) => {
     return (value as {type: string; mode: string; address: string}[]).map(v => {
-      if (v.type === 'null_resource') {
-        return transformer.plainToClass(NullResource, v, options)
-      } else if (v.mode === 'managed') {
+      if (v.mode === 'managed') {
         const cls = ManagedResources.find(
           c => camelCaseToSnakeCase(c.name) === v.type
         )
@@ -435,7 +431,7 @@ class Module {
         }
       } else {
         throw new Error(
-          `Expected either a null_resource, ManagedResource or a DataResource, got this instead: ${JSON.stringify(
+          `Expected either a ManagedResource or a DataResource, got this instead: ${JSON.stringify(
             v
           )}`
         )

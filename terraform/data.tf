@@ -54,15 +54,3 @@ data "github_tree" "this" {
   repository = each.value.repository
   tree_sha   = each.value.sha
 }
-
-resource "null_resource" "data" {
-  depends_on = [
-    data.github_organization.this,
-    data.github_repositories.this,
-    data.github_collaborators.this,
-    data.github_repository.this,
-    data.github_organization_teams.this,
-    data.github_branch.this,
-    data.github_tree.this
-  ]
-}

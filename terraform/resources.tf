@@ -281,16 +281,3 @@ resource "github_repository_file" "this" {
     ]
   }
 }
-
-resource "null_resource" "resources" {
-  depends_on = [
-    github_membership.this,
-    github_repository.this,
-    github_repository_collaborator.this,
-    github_branch_protection.this,
-    github_team.this,
-    github_team_membership.this,
-    github_team_repository.this,
-    github_repository_file.this
-  ]
-}
