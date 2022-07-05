@@ -529,12 +529,12 @@ export class State {
   async sync(managedResourceTypes: string[]): Promise<State> {
     // remove all the resources (from Terraform state) that GitHub doesn't know about anymore
     for (const resource of this.getResourcesToRemove(managedResourceTypes)) {
-      resource.remove()
+      await resource.remove()
     }
 
     // import all the resources (to Terraform state) that Terraform doesn't know about yet
     for (const resource of this.getResourcesToImport(managedResourceTypes)) {
-      resource.import()
+      await resource.import()
     }
 
     return await getState()
