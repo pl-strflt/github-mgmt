@@ -21,6 +21,7 @@ class Resource {
   }
 
   async import(): Promise<void> {
+    console.log(`Importing ${JSON.stringify(this)}`)
     if (env.TF_EXEC) {
       await cli.exec(
         `terraform import -lock=${env.TF_LOCK} "${this.address.replaceAll(
@@ -34,6 +35,7 @@ class Resource {
   }
 
   async remove(): Promise<void> {
+    console.log(`Removing ${JSON.stringify(this)}`)
     if (env.TF_EXEC) {
       await cli.exec(
         `terraform state rm -lock=${env.TF_LOCK} "${this.address.replaceAll(
@@ -57,11 +59,13 @@ abstract class DataResource extends Resource {
   }
 }
 class DesiredResource extends Resource {
-  constructor(address: string, values: Identifiable) {
+  constructor(address: string, id: string) {
     super()
     this.address = address
     this.type = address.split('.')[0]
-    this.values = values
+    this.values = {
+      id: id
+    }
   }
 }
 
@@ -258,7 +262,7 @@ class GithubOrganizationData extends DataResource {
     return this.values.members.map(member => {
       const resource = new DesiredResource(
         `github_membership.this["${member}"]`,
-        {id: `${this.values.login}:${member}`}
+        `${this.values.login}:${member}`
       )
       return resource
     })
@@ -273,7 +277,7 @@ class GithubRepositoriesData extends DataResource {
     return this.values.names.map(name => {
       const resource = new DesiredResource(
         `github_repository.this["${name}"]`,
-        {id: name}
+        name
       )
       return resource
     })
@@ -290,7 +294,7 @@ class GithubCollaboratorsData extends DataResource {
     return this.values.collaborator.map(collaborator => {
       const resource = new DesiredResource(
         `github_repository_collaborator.this["${this.values.repository}:${collaborator.login}"]`,
-        {id: `${this.values.repository}:${collaborator.login}`}
+        `${this.values.repository}:${collaborator.login}`
       )
       return resource
     })
@@ -311,7 +315,7 @@ class GithubRepositoryData extends DataResource {
       .map(branch => {
         const resource = new DesiredResource(
           `github_branch_protection.this["${this.values.name}:${branch.name}"]`,
-          {id: `${this.values.name}:${branch.name}`}
+          `${this.values.name}:${branch.name}`
         )
         return resource
       })
@@ -332,7 +336,7 @@ class GithubOrganizationTeamsData extends DataResource {
       ...this.values.teams.map(team => {
         const resource = new DesiredResource(
           `github_team.this["${team.name}"]`,
-          {id: team.id}
+          team.id
         )
         return resource
       })
@@ -342,7 +346,7 @@ class GithubOrganizationTeamsData extends DataResource {
         return team.repositories.map(repository => {
           const resource = new DesiredResource(
             `github_team_repository.this["${team.name}:${repository}"]`,
-            {id: `${team.id}:${repository}`}
+            `${team.id}:${repository}`
           )
           return resource
         })
@@ -353,7 +357,7 @@ class GithubOrganizationTeamsData extends DataResource {
         return team.members.map(member => {
           const resource = new DesiredResource(
             `github_team_membership.this["${team.name}:${member}"]`,
-            {id: `${team.id}:${member}`}
+            `${team.id}:${member}`
           )
           return resource
         })
