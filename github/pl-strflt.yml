@@ -1,3 +1,35 @@
 # yaml-language-server: $schema=.schema.json
 
-{}
+members:
+  admin:
+    - galargh
+    - laurentsenta
+repositories:
+  github-action-releaser: {}
+  github-mgmt:
+    teams:
+      triage:
+        - ipdx
+  ipdx: {}
+  projects-migration:
+    collaborators:
+      admin:
+        - galargh
+  projects-status-history:
+    collaborators:
+      admin:
+        - galargh
+  rust-sccache-action:
+    collaborators:
+      admin:
+        - galargh
+  tf-aws-gh-runner:
+    teams:
+      maintain:
+        - ipdx
+teams:
+  ipdx:
+    members:
+      maintainer:
+        - galargh
+        - laurentsenta
