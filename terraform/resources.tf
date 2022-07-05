@@ -290,7 +290,7 @@ resource "null_resource" "resources" {
     github_branch_protection.this,
     github_team.this,
     github_team_membership.this,
-    github_team_membership.this,
+    github_team_repository.this,
     github_repository_file.this
   ]
 }
