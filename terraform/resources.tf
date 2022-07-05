@@ -183,10 +183,10 @@ resource "github_team" "this" {
     })
   } : {}
 
-  name                      = each.value.name
-  description               = try(each.value.description, null)
-  parent_team_id            = try(each.value.parent_team_id, null)
-  privacy                   = try(each.value.privacy, null)
+  name           = each.value.name
+  description    = try(each.value.description, null)
+  parent_team_id = try(each.value.parent_team_id, null)
+  privacy        = try(each.value.privacy, null)
 
   lifecycle {
     ignore_changes = [
