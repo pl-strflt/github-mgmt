@@ -14,9 +14,9 @@ repositories:
     teams:
       admin:
         - ipdx
-  projects-migration:
-  projects-status-history:
-  rust-sccache-action:
+  projects-migration: {}
+  projects-status-history: {}
+  rust-sccache-action: {}
   tf-aws-gh-runner:
     teams:
       maintain:
