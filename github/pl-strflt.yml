@@ -10,19 +10,13 @@ repositories:
     teams:
       triage:
         - ipdx
-  ipdx: {}
-  projects-migration:
-    collaborators:
+  ipdx:
+    teams:
       admin:
-        - galargh
-  projects-status-history:
-    collaborators:
-      admin:
-        - galargh
-  rust-sccache-action:
-    collaborators:
-      admin:
-        - galargh
+        - ipdx
+  projects-migration: {}
+  projects-status-history: {}
+  rust-sccache-action: {}
   tf-aws-gh-runner:
     teams:
       maintain:
