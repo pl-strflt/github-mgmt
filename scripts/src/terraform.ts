@@ -1,7 +1,8 @@
 import * as HCL from 'hcl2-parser'
 import * as YAML from 'yaml'
 import * as cli from '@actions/exec'
-import * as config from './yaml'
+import * as cfg from './yaml'
+import * as core from '@actions/core'
 import * as fs from 'fs'
 import * as transformer from 'class-transformer'
 import {Transform, Type} from 'class-transformer'
@@ -21,13 +22,14 @@ class Resource {
   }
 
   async import(): Promise<void> {
-    console.log(`Importing ${JSON.stringify(this)}`)
+    core.info(`Importing ${JSON.stringify(this)}`)
     if (env.TF_EXEC) {
       await cli.exec(
-        `terraform import -lock=${env.TF_LOCK} "${this.address.toString().replaceAll(
-          '"',
-          '\\"'
-        )}" "${this.values.id.toString().replaceAll('"', '\\"')}"`,
+        `terraform import -lock=${env.TF_LOCK} "${this.address
+          .toString()
+          .replaceAll('"', '\\"')}" "${this.values.id
+          .toString()
+          .replaceAll('"', '\\"')}"`,
         undefined,
         {cwd: env.TF_WORKING_DIR}
       )
@@ -35,13 +37,12 @@ class Resource {
   }
 
   async remove(): Promise<void> {
-    console.log(`Removing ${JSON.stringify(this)}`)
+    core.info(`Removing ${JSON.stringify(this)}`)
     if (env.TF_EXEC) {
       await cli.exec(
-        `terraform state rm -lock=${env.TF_LOCK} "${this.address.toString().replaceAll(
-          '"',
-          '\\"'
-        )}"`,
+        `terraform state rm -lock=${env.TF_LOCK} "${this.address
+          .toString()
+          .replaceAll('"', '\\"')}"`,
         undefined,
         {cwd: env.TF_WORKING_DIR}
       )
@@ -51,10 +52,10 @@ class Resource {
 
 abstract class ManagedResource extends Resource {
   index!: string
-  abstract getYAMLResource(context: State): config.Resource
+  abstract getYAMLResource(context: State): cfg.Resource
 }
 abstract class DataResource extends Resource {
-  getDesiredResources(_context: config.Config): DesiredResource[] {
+  getDesiredResources(_context: cfg.Config): DesiredResource[] {
     return []
   }
 }
@@ -64,7 +65,7 @@ class DesiredResource extends Resource {
     this.address = address
     this.type = address.split('.')[0]
     this.values = {
-      id: id
+      id
     }
   }
 }
@@ -75,8 +76,8 @@ class GithubMembership extends ManagedResource {
     role: 'admin' | 'member'
     username: string
   }
-  override getYAMLResource(_context: State): config.Resource {
-    return new config.Resource(
+  override getYAMLResource(_context: State): cfg.Resource {
+    return new cfg.Resource(
       this.type,
       ['members', this.values.role],
       YAML.parseDocument(this.values.username).contents as YAML.Scalar
@@ -94,17 +95,17 @@ class GithubRepository extends ManagedResource {
         }[]
       | {source?: {}}
   }
-  override getYAMLResource(_context: State): config.Resource {
+  override getYAMLResource(_context: State): cfg.Resource {
     const values = {...this.values}
     values.pages = {...((values.pages as {}[])[0] || {})}
     if (values.pages.source) {
       values.pages.source = (values.pages.source as {}[])[0] || {}
     }
     values.template = (values.template as {}[])[0] || {}
-    const value = transformer.plainToClass(config.Repository, values, {
+    const value = transformer.plainToClass(cfg.Repository, values, {
       excludeExtraneousValues: true
     })
-    return new config.Resource(
+    return new cfg.Resource(
       this.type,
       ['repositories'],
       (
@@ -121,8 +122,8 @@ class GithubRepositoryCollaborator extends ManagedResource {
     repository: string
     permission: 'admin' | 'maintain' | 'push' | 'triage' | 'pull'
   }
-  override getYAMLResource(_context: State): config.Resource {
-    return new config.Resource(
+  override getYAMLResource(_context: State): cfg.Resource {
+    return new cfg.Resource(
       this.type,
       [
         'repositories',
@@ -142,16 +143,16 @@ class GithubRepositoryFile extends ManagedResource {
     repository: string
     content: string
   }
-  override getYAMLResource(_context: State): config.Resource {
+  override getYAMLResource(_context: State): cfg.Resource {
     const values = {...this.values}
     const file = findFileByContent(env.FILES_DIR, values.content)
     if (file) {
       values.content = file.substring(env.FILES_DIR.length + 1)
     }
-    const value = transformer.plainToClass(config.File, values, {
+    const value = transformer.plainToClass(cfg.File, values, {
       excludeExtraneousValues: true
     })
-    return new config.Resource(
+    return new cfg.Resource(
       this.type,
       ['repositories', this.values.repository, 'files'],
       (
@@ -169,16 +170,16 @@ class GithubBranchProtection extends ManagedResource {
     required_pull_request_reviews: {}[] | {}
     required_status_checks: {}[] | {}
   }
-  override getYAMLResource(_context: State): config.Resource {
+  override getYAMLResource(_context: State): cfg.Resource {
     const values = {...this.values}
     values.required_pull_request_reviews =
       (values.required_pull_request_reviews as {}[])[0] || {}
     values.required_status_checks =
       (values.required_status_checks as {}[])[0] || {}
-    const value = transformer.plainToClass(config.BranchProtection, values, {
+    const value = transformer.plainToClass(cfg.BranchProtection, values, {
       excludeExtraneousValues: true
     })
-    return new config.Resource(
+    return new cfg.Resource(
       this.type,
       ['repositories', this.index.split(':')[0], 'branch_protection'],
       (
@@ -194,7 +195,7 @@ class GithubTeam extends ManagedResource {
     name: string
     parent_team_id: string | null
   }
-  override getYAMLResource(context: State): config.Resource {
+  override getYAMLResource(context: State): cfg.Resource {
     const values = {...this.values}
     if (values.parent_team_id) {
       const parentTeam = context
@@ -210,10 +211,10 @@ class GithubTeam extends ManagedResource {
         )
       }
     }
-    const value = transformer.plainToClass(config.Team, values, {
+    const value = transformer.plainToClass(cfg.Team, values, {
       excludeExtraneousValues: true
     })
-    return new config.Resource(
+    return new cfg.Resource(
       this.type,
       ['teams'],
       (
@@ -229,8 +230,8 @@ class GithubTeamMembership extends ManagedResource {
     username: string
     role: 'maintainer' | 'member'
   }
-  override getYAMLResource(_context: State): config.Resource {
-    return new config.Resource(
+  override getYAMLResource(_context: State): cfg.Resource {
+    return new cfg.Resource(
       this.type,
       ['teams', this.index.split(':')[0], 'members', this.values.role],
       YAML.parseDocument(this.values.username).contents as YAML.Scalar
@@ -243,8 +244,8 @@ class GithubTeamRepository extends ManagedResource {
     repository: string
     permission: 'admin' | 'maintain' | 'push' | 'triage' | 'pull'
   }
-  override getYAMLResource(_context: State): config.Resource {
-    return new config.Resource(
+  override getYAMLResource(_context: State): cfg.Resource {
+    return new cfg.Resource(
       this.type,
       ['repositories', this.values.repository, 'teams', this.values.permission],
       YAML.parseDocument(this.index.split(':')[0]).contents as YAML.Scalar
@@ -256,7 +257,7 @@ class GithubOrganizationData extends DataResource {
     login: string
     members: string[]
   }
-  override getDesiredResources(_context: config.Config): DesiredResource[] {
+  override getDesiredResources(_context: cfg.Config): DesiredResource[] {
     return this.values.members.map(member => {
       const resource = new DesiredResource(
         `github_membership.this["${member}"]`,
@@ -271,7 +272,7 @@ class GithubRepositoriesData extends DataResource {
     names: string[]
   }
 
-  override getDesiredResources(_context: config.Config): DesiredResource[] {
+  override getDesiredResources(_context: cfg.Config): DesiredResource[] {
     return this.values.names.map(name => {
       const resource = new DesiredResource(
         `github_repository.this["${name}"]`,
@@ -288,7 +289,7 @@ class GithubCollaboratorsData extends DataResource {
     }[]
     repository: string
   }
-  override getDesiredResources(_context: config.Config): DesiredResource[] {
+  override getDesiredResources(_context: cfg.Config): DesiredResource[] {
     return this.values.collaborator.map(collaborator => {
       const resource = new DesiredResource(
         `github_repository_collaborator.this["${this.values.repository}:${collaborator.login}"]`,
@@ -307,7 +308,7 @@ class GithubRepositoryData extends DataResource {
     }[]
     default_branch: string
   }
-  override getDesiredResources(_context: config.Config): DesiredResource[] {
+  override getDesiredResources(_context: cfg.Config): DesiredResource[] {
     return this.values.branches
       .filter(branch => branch.protected)
       .map(branch => {
@@ -328,7 +329,7 @@ class GithubOrganizationTeamsData extends DataResource {
       members: string[]
     }[]
   }
-  override getDesiredResources(_context: config.Config): DesiredResource[] {
+  override getDesiredResources(_context: cfg.Config): DesiredResource[] {
     const resources = []
     resources.push(
       ...this.values.teams.map(team => {
@@ -372,19 +373,36 @@ class GithubTreeData extends DataResource {
       path: string
     }[]
   }
-  override getDesiredResources(context: config.Config): DesiredResource[] {
+  override getDesiredResources(context: cfg.Config): DesiredResource[] {
     const paths = context.getResources([GithubRepositoryFile]).map(resource => {
-      if (YAML.isPair(resource.value) && YAML.isScalar(resource.value.key) && typeof resource.value.key.value === 'string') {
+      if (
+        YAML.isPair(resource.value) &&
+        YAML.isScalar(resource.value.key) &&
+        typeof resource.value.key.value === 'string'
+      ) {
         return [...resource.path, resource.value.key.value].join('.')
       } else {
-        throw new Error(`Expected a Pair with a string Scalar key, got this instead: ${JSON.stringify(resource.value)}`)
+        throw new Error(
+          `Expected a Pair with a string Scalar key, got this instead: ${JSON.stringify(
+            resource.value
+          )}`
+        )
       }
     })
     const repository = this.index.split(':')[0]
     const branch = this.index.split(':')[1]
-    return this.values.entries.filter(entry => paths.includes(['repositories', repository, 'files', entry.path].join('.'))).map(entry => {
-      return new DesiredResource(`github_repository_file.this["${repository}/${entry.path}"]`, `${repository}/${entry.path}:${branch}`)
-    })
+    return this.values.entries
+      .filter(entry =>
+        paths.includes(
+          ['repositories', repository, 'files', entry.path].join('.')
+        )
+      )
+      .map(entry => {
+        return new DesiredResource(
+          `github_repository_file.this["${repository}/${entry.path}"]`,
+          `${repository}/${entry.path}:${branch}`
+        )
+      })
   }
 }
 
@@ -464,7 +482,7 @@ export class State {
   @Type(() => Values)
   values!: Values
 
-  getYAMLResources(): config.Resource[] {
+  getYAMLResources(): cfg.Resource[] {
     return this.getManagedResources().map(resource =>
       resource.getYAMLResource(this)
     )
@@ -482,13 +500,16 @@ export class State {
     ) as ManagedResource[]
   }
 
-  getDesiredResources(context: config.Config): DesiredResource[] {
+  getDesiredResources(context: cfg.Config): DesiredResource[] {
     return this.getDataResources().flatMap(resource =>
       resource.getDesiredResources(context)
     )
   }
 
-  getResourcesToImport(config: config.Config, managedResourceTypes: string[]): Resource[] {
+  getResourcesToImport(
+    config: cfg.Config,
+    managedResourceTypes: string[]
+  ): Resource[] {
     const managedResources = this.getManagedResources()
     const desiredResources = this.getDesiredResources(config)
 
@@ -504,7 +525,10 @@ export class State {
     return resourcesToImport
   }
 
-  getResourcesToRemove(config: config.Config, managedResourceTypes: string[]): Resource[] {
+  getResourcesToRemove(
+    config: cfg.Config,
+    managedResourceTypes: string[]
+  ): Resource[] {
     const managedResources = this.getManagedResources()
     const desiredResources = this.getDesiredResources(config)
 
@@ -521,14 +545,24 @@ export class State {
     return resourcesToRemove
   }
 
-  async sync(config: config.Config, managedResourceTypes: string[]): Promise<State> {
+  async sync(
+    config: cfg.Config,
+    managedResourceTypes: string[]
+  ): Promise<State> {
+    core.info('Syncing TF state with GitHub...')
     // remove all the resources (from Terraform state) that GitHub doesn't know about anymore
-    for (const resource of this.getResourcesToRemove(config, managedResourceTypes)) {
+    for (const resource of this.getResourcesToRemove(
+      config,
+      managedResourceTypes
+    )) {
       await resource.remove()
     }
 
     // import all the resources (to Terraform state) that Terraform doesn't know about yet
-    for (const resource of this.getResourcesToImport(config, managedResourceTypes)) {
+    for (const resource of this.getResourcesToImport(
+      config,
+      managedResourceTypes
+    )) {
       await resource.import()
     }
 
