@@ -179,7 +179,7 @@ export default class Schema {
   teams?: Record<string, TeamContainer>
 }
 
-class Config {
+export class Config {
   document: YAML.Document
 
   constructor(yaml: string) {
@@ -285,8 +285,8 @@ class Config {
     return this.find(resource) !== undefined
   }
 
-  getResources(): Resource[] {
-    return ManagedResources.flatMap(cls => {
+  getResources(classes: typeof ManagedResources = ManagedResources): Resource[] {
+    return classes.flatMap(cls => {
       return this.matchIn(camelCaseToSnakeCase(cls.name), cls.yamlPath)
     })
   }
