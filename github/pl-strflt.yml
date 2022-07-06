@@ -50,6 +50,9 @@ repositories:
           contexts:
             - Plan
           strict: true
+    collaborators:
+      admin:
+        - galargh
     delete_branch_on_merge: true
     files:
       README.md:
