@@ -72,7 +72,16 @@ jobs:
           terraform workspace select '${{ matrix.workspace }}' || terraform workspace new '${{ matrix.workspace }}'
           echo 'TF_WORKSPACE=${{ matrix.workspace }}' >> $GITHUB_ENV
         working-directory: terraform
+      - name: Generate app token
+        id: token
+        uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5.1
+        with:
+          app_id: ${{ secrets.RO_GITHUB_APP_ID }}
+          installation_id: ${{ secrets[format('RO_GITHUB_APP_INSTALLATION_ID_{0}', github.repository_owner)] || secrets.RO_GITHUB_APP_INSTALLATION_ID }}
+          private_key: ${{ secrets.RO_GITHUB_APP_PEM_FILE }}
       - name: Sync
+        env:
+          GITHUB_APP_TOKEN: ${{ steps.token.outputs.token }}
         run: |
           npm install
           npm run build
