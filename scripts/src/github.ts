@@ -18,7 +18,7 @@ type Repositories = GetResponseDataTypeFromEndpointMethod<
 type Teams = GetResponseDataTypeFromEndpointMethod<typeof Endpoints.teams.list>
 
 export class GitHub {
-  private static github: GitHub
+  static github: GitHub
   static async getGitHub(): Promise<GitHub> {
     if (GitHub.github === undefined) {
       const auth = createAppAuth({
@@ -41,25 +41,31 @@ export class GitHub {
     this.client = new Client({
       auth: token,
       throttle: {
-        onRateLimit: (retryAfter: any, options: any, octokit: any) => {
-          octokit.log.warn(
+        onRateLimit: (
+          retryAfter: number,
+          options: {method: string; url: string; request: {retryCount: number}}
+        ) => {
+          core.warning(
             `Request quota exhausted for request ${options.method} ${options.url}`
           )
 
           if (options.request.retryCount === 0) {
             // only retries once
-            octokit.log.info(`Retrying after ${retryAfter} seconds!`)
+            core.info(`Retrying after ${retryAfter} seconds!`)
             return true
           }
         },
-        onSecondaryRateLimit: (retryAfter: any, options: any, octokit: any) => {
-          octokit.log.warn(
+        onSecondaryRateLimit: (
+          retryAfter: number,
+          options: {method: string; url: string; request: {retryCount: number}}
+        ) => {
+          core.warning(
             `SecondaryRateLimit detected for request ${options.method} ${options.url}`
           )
 
           if (options.request.retryCount === 0) {
             // only retries once
-            octokit.log.info(`Retrying after ${retryAfter} seconds!`)
+            core.info(`Retrying after ${retryAfter} seconds!`)
             return true
           }
         }
@@ -73,6 +79,7 @@ export class GitHub {
   }
 
   async listMembers() {
+    core.info('Listing members...')
     return this.client.paginate(this.client.orgs.listMembers, {
       org: env.GITHUB_ORG
     })
@@ -81,6 +88,7 @@ export class GitHub {
   private repositories?: Repositories
   async listRepositories() {
     if (!this.repositories) {
+      core.info('Listing repositories...')
       this.repositories = await this.client.paginate(
         this.client.repos.listForOrg,
         {
@@ -94,6 +102,7 @@ export class GitHub {
   private teams?: Teams
   async listTeams() {
     if (!this.teams) {
+      core.info('Listing teams...')
       this.teams = await this.client.paginate(this.client.teams.list, {
         org: env.GITHUB_ORG
       })
@@ -105,9 +114,10 @@ export class GitHub {
     const repositoryCollaborators = []
     const repositories = await this.listRepositories()
     for (const repository of repositories) {
+      core.info(`Listing ${repository.name} collaborators...`)
       const collaborators = await this.client.paginate(
         this.client.repos.listCollaborators,
-        {owner: env.GITHUB_ORG, repo: repository.name, affiliation: "direct"}
+        {owner: env.GITHUB_ORG, repo: repository.name, affiliation: 'direct'}
       )
       repositoryCollaborators.push(
         ...collaborators.map(collaborator => ({repository, collaborator}))
@@ -121,6 +131,7 @@ export class GitHub {
     const repositoryBranchProtectionRules = []
     const repositories = await this.listRepositories()
     for (const repository of repositories) {
+      core.info(`Listing ${repository.name} branch protection rules...`)
       const {
         repository: {
           branchProtectionRules: {nodes}
@@ -150,6 +161,7 @@ export class GitHub {
     const teamMembers = []
     const teams = await this.listTeams()
     for (const team of teams) {
+      core.info(`Listing ${team.name} members...`)
       const members = await this.client.paginate(
         this.client.teams.listMembersInOrg,
         {org: env.GITHUB_ORG, team_slug: team.slug}
@@ -163,6 +175,7 @@ export class GitHub {
     const teamRepositories = []
     const teams = await this.listTeams()
     for (const team of teams) {
+      core.info(`Listing ${team.name} repositories...`)
       const repositories = await this.client.paginate(
         this.client.teams.listReposInOrg,
         {org: env.GITHUB_ORG, team_slug: team.slug}
@@ -175,6 +188,7 @@ export class GitHub {
   }
 
   async getRepositoryFile(repository: string, path: string) {
+    core.info(`Checking if ${repository}/${path} exists...`)
     try {
       return (
         await this.client.repos.getContent({
