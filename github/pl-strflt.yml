@@ -55,6 +55,9 @@ repositories:
         - galargh
     delete_branch_on_merge: true
     files:
+      CODEOWNERS:
+        content: >
+          *       @galargh
       README.md:
         branch: master
         commit_author: galargh
@@ -87,6 +90,8 @@ repositories:
     has_wiki: false
     is_template: false
     teams:
+      maintain:
+        - w3dt-stewards
       triage:
         - ipdx
     template:
@@ -199,3 +204,8 @@ teams:
         - galargh
         - laurentsenta
     privacy: closed
+  w3dt-stewards:
+    members:
+      maintainer:
+        - galargh
+        - laurentsenta
