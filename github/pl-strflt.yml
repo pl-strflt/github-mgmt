@@ -5,6 +5,7 @@ members:
     - galargh
     - laurentsenta
 repositories:
+  new-repo: {}
   github-action-releaser:
     allow_auto_merge: false
     allow_merge_commit: true
