@@ -117,7 +117,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: head/terraform
+        working-directory: terraform
     steps:
       - uses: actions/checkout@v2
         with:
@@ -160,7 +160,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: head/terraform
+        working-directory: terraform
     steps:
       - uses: actions/checkout@v2
         with:
