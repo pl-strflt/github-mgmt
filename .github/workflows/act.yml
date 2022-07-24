@@ -1,9 +1,11 @@
 name: Act
 
 on:
-  push:
-    branches:
-      - master
+  workflow_run:
+    workflows:
+      - "Apply"
+    types:
+      - completed
   workflow_dispatch:
     inputs:
       workspaces:
@@ -12,7 +14,9 @@ on:
 
 jobs:
   prepare:
-    if: github.event.repository.is_template == false
+    if: github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'workflow_run' &&
+        github.event.workflow_run.conclusion == 'success')
     name: Prepare
     runs-on: ubuntu-latest
     outputs:
