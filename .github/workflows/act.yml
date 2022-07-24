@@ -1,20 +1,22 @@
-name: Sync
+name: Act
 
 on:
-  schedule:
-    - cron: 0 0 * * 0
+  push:
+    branches:
+      - master
   workflow_dispatch:
     inputs:
       workspaces:
-        description: Space separated list of workspaces to sync (leave blank to sync all)
+        description: Space separated list of workspaces to run actions in (leave blank to run actions in all)
         required: false
       lock:
-        description: Whether to acquire terraform state lock during sync
+        description: Whether to acquire terraform state lock during running actions
         required: false
         default: "true"
 
 jobs:
   prepare:
+    if: github.event.repository.is_template == false
     name: Prepare
     runs-on: ubuntu-latest
     outputs:
@@ -34,7 +36,7 @@ jobs:
             workspaces="$(echo '${{ github.event.inputs.workspaces }}' | jq --raw-input 'split(" ")')"
           fi
           echo "::set-output name=this::$workspaces"
-  sync:
+  act:
     needs: [prepare]
     if: needs.prepare.outputs.workspaces != ''
     permissions:
@@ -43,17 +45,17 @@ jobs:
       fail-fast: false
       matrix:
         workspace: ${{ fromJson(needs.prepare.outputs.workspaces) }}
-    name: Sync
+    name: Act
     runs-on: ubuntu-latest
     env:
       TF_IN_AUTOMATION: 1
       TF_INPUT: 0
       TF_LOCK: ${{ github.event.inputs.lock }}
-      AWS_ACCESS_KEY_ID: ${{ secrets.RW_AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.RW_AWS_SECRET_ACCESS_KEY }}
-      GITHUB_APP_ID: ${{ secrets.RW_GITHUB_APP_ID }}
-      GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RW_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RW_GITHUB_APP_INSTALLATION_ID }}
-      GITHUB_APP_PEM_FILE: ${{ secrets.RW_GITHUB_APP_PEM_FILE }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.RO_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.RO_AWS_SECRET_ACCESS_KEY }}
+      GITHUB_APP_ID: ${{ secrets.RO_GITHUB_APP_ID }}
+      GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RO_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RO_GITHUB_APP_INSTALLATION_ID }}
+      GITHUB_APP_PEM_FILE: ${{ secrets.RO_GITHUB_APP_PEM_FILE }}
       TF_VAR_write_delay_ms: 300
     defaults:
       run:
@@ -74,23 +76,23 @@ jobs:
           terraform workspace select '${{ matrix.workspace }}' || terraform workspace new '${{ matrix.workspace }}'
           echo 'TF_WORKSPACE=${{ matrix.workspace }}' >> $GITHUB_ENV
         working-directory: terraform
-      - name: Sync
+      - name: Act
         run: |
           npm install
           npm run build
-          npm run main
+          node lib/actions/*.js
         working-directory: scripts
       - uses: ./.github/actions/git-config-user
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git_branch='${{ github.ref_name }}-sync-${{ env.TF_WORKSPACE }}'
+          git_branch='${{ github.ref_name }}-act-${{ env.TF_WORKSPACE }}'
           git checkout -B "$git_branch"
           git add --all
-          git diff-index --quiet HEAD || git commit --message='chore: sync ${{ env.TF_WORKSPACE }} (#${{ github.run_number }})'
+          git diff-index --quiet HEAD || git commit --message='chore: act ${{ env.TF_WORKSPACE }} (#${{ github.run_number }})'
           git push origin "$git_branch" --force
   pull_request:
-    needs: [prepare, sync]
+    needs: [prepare, act]
     if: needs.prepare.outputs.workspaces != ''
     name: Pull request
     runs-on: ubuntu-latest
@@ -112,7 +114,7 @@ jobs:
       - uses: ./.github/actions/git-config-user
       - run: |
           while read workspace; do
-            workspace_branch="${{ github.ref_name }}-sync-$workspace"
+            workspace_branch="${{ github.ref_name }}-act-$workspace"
             git fetch origin "$workspace_branch"
             git merge --strategy-option=theirs "origin/$workspace_branch"
             git push origin --delete "$workspace_branch"
@@ -121,4 +123,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.token.outputs.token }}
         with:
-          suffix: sync
+          suffix: act
