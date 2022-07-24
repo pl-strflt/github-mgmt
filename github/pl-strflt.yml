@@ -60,10 +60,6 @@ repositories:
         content: >
           *       @galargh
       README.md:
-        branch: master
-        commit_author: galargh
-        commit_email: piotr.galar@gmail.com
-        commit_message: Update README
         content: >
           # GitHub Management via Terraform: pl-strflt
 
