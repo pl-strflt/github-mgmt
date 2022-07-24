@@ -25,7 +25,7 @@ jobs:
       sha: ${{ steps.github.outputs.sha }}
       ref: ${{ steps.github.outputs.ref }}
       number: ${{ steps.github.outputs.number }}
-      label: ${{ steps.github.outputs.label }}
+      ref-name: ${{ steps.github.outputs.ref-name }}
       should-act: ${{ steps.should-act.outputs.this }}
     defaults:
       run:
@@ -39,20 +39,20 @@ jobs:
           if [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
             sha='${{ github.sha }}'
             ref='${{ github.sha }}'
-            label='${{ github.ref }}'
+            ref_name='${{ github.ref_name }}'
           elif [[ '${{ github.event_name }}' == 'workflow_run' ]]; then
             sha='${{ github.event.workflow_run.head_commit.id }}'
             ref="$(gh api '/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/jobs' --jq '.jobs[] | .steps[] | .name | select(startswith("Run ref="))')"
             ref="${ref#Run ref=}"
             number="$(gh api '/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/jobs' --jq '.jobs[] | .steps[] | .name | select(startswith("Run number="))')"
             number="${number#Run number=}"
-            label="$(gh api '/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/jobs' --jq '.jobs[] | .steps[] | .name | select(startswith("Run label="))')"
-            label="${label#Run label=}"
+            ref_name="$(gh api '/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/jobs' --jq '.jobs[] | .steps[] | .name | select(startswith("Run label="))')"
+            ref_name="${ref_name#Run label=}"
           fi
           echo "::set-output name=sha::$sha"
           echo "::set-output name=ref::$ref"
           echo "::set-output name=number::$number"
-          echo "::set-output name=label::$label"
+          echo "::set-output name=ref-name::$ref_name"
       - run: sha=${{ steps.github.outputs.sha }}
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -125,7 +125,7 @@ jobs:
         run: |
           git add --all -- github
           git commit --message='chore: Update github/*.yml [plan]'
-          git push origin ${{ needs.prepare.outputs.label }}
+          git push origin ${{ needs.prepare.outputs.ref-name }}
         working-directory: head
   plan:
     needs: [prepare, act]
