@@ -13,6 +13,7 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    default_branch: main
     delete_branch_on_merge: false
     description: Release steps for github actions.
     has_downloads: true
@@ -54,11 +55,13 @@ repositories:
     collaborators:
       admin:
         - galargh
+    default_branch: master
     delete_branch_on_merge: true
     files:
       CODEOWNERS:
         content: >
           *       @galargh
+        overwrite_on_create: false
       README.md:
         content: >
           # GitHub Management via Terraform: pl-strflt
@@ -103,6 +106,7 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
     has_issues: true
@@ -121,6 +125,7 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
     has_issues: true
@@ -147,6 +152,7 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
     has_issues: true
@@ -165,6 +171,7 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
     has_issues: true
@@ -183,6 +190,7 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
     has_issues: true
@@ -202,7 +210,9 @@ teams:
         - laurentsenta
     privacy: closed
   w3dt-stewards:
+    create_default_maintainer: false
     members:
       maintainer:
         - galargh
         - laurentsenta
+    privacy: secret
