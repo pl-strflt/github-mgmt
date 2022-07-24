@@ -76,6 +76,10 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       should-push: ${{ steps.should-push.outputs.this }}
+    env:
+      GITHUB_APP_ID: ${{ secrets.RO_GITHUB_APP_ID }}
+      GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RO_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RO_GITHUB_APP_INSTALLATION_ID }}
+      GITHUB_APP_PEM_FILE: ${{ secrets.RO_GITHUB_APP_PEM_FILE }}
     defaults:
       run:
         shell: bash
@@ -99,7 +103,7 @@ jobs:
         run: |
           while read workspace; do
             TF_WORKSPACE="$workspace" node ../../base/scripts/lib/actions/*.js
-          done <<< "$(jq -r '.[]' <<< '${{ needs.pre.outputs.this }}')"
+          done <<< "$(jq -r '.[]' <<< '${{ needs.prepare.outputs.workspaces }}')"
         working-directory: head/scripts
       - name: Check git status
         id: should-push
