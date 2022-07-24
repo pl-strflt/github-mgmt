@@ -112,7 +112,7 @@ jobs:
         working-directory: head
       - name: Prepare git
         if: steps.should-push.outputs.this == 'true'
-        uses: ./.github/actions/git-config-user
+        uses: ./base/.github/actions/git-config-user
       - name: Push changes
         if: steps.should-push.outputs.this == 'true'
         env:
