@@ -25,6 +25,8 @@ async function run(): Promise<void> {
 
     // TODO: we need a better abstraction here, one which has a proper constructor
     //       and doesn't know anything about terraform (i.e. values.id)
+    //       ideally, we should be able to replace all of this with something like:
+    //       const rule = new BranchProtectionRule(name, pattern)
     const rule = new terraform.GithubBranchProtection()
     rule.index = `${name}:${pattern}`
     rule.values = {
@@ -35,7 +37,7 @@ async function run(): Promise<void> {
       required_pull_request_reviews: {},
     }
 
-    // TODO: this is not pretty, maybe the context should be optional?
+    // TODO: we should be able to get a YAML representation of a resource without providing a terraform context
     const resource = await rule.getYAMLResource(null as any)
 
     // NOTE: add is a noop if a resource already exists
