@@ -20,7 +20,7 @@ async function run(): Promise<void> {
     //       const pattern = repository.getPattern()
     const name = ((repository.value as YAML.Pair).key as YAML.Scalar<string>).value
     const pattern = (((repository.value as YAML.Pair).value as YAML.YAMLMap).items.find(pair => {
-      return (pair.key as YAML.Scalar<string>).value === 'pattern'
+      return (pair.key as YAML.Scalar<string>).value === 'default_branch'
     })?.value as YAML.Scalar<string>)?.value || 'main'
 
     // TODO: we need a better abstraction here, one which has a proper constructor
