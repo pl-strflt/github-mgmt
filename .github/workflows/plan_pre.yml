@@ -15,4 +15,3 @@ jobs:
         run: echo "::set-output name=this::$(git rev-parse HEAD)"
       - run: ref=${{ steps.ref.outputs.this }}
       - run: number=${{ github.event.pull_request.number }}
-      - run: label=${{ github.event.pull_request.head.label }}
