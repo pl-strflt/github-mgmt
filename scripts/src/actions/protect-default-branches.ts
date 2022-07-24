@@ -33,8 +33,6 @@ async function run(): Promise<void> {
       id: '',
       repository: name,
       pattern: pattern,
-      required_status_checks: {},
-      required_pull_request_reviews: {},
     }
 
     // TODO: we should be able to get a YAML representation of a resource without providing a terraform context
