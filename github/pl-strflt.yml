@@ -5,6 +5,8 @@ members:
     - galargh
     - laurentsenta
 repositories:
+  github-mgmt-test:
+    default_branch: dev
   github-action-releaser:
     allow_auto_merge: false
     allow_merge_commit: true
