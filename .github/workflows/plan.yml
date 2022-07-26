@@ -93,7 +93,7 @@ jobs:
           retention-days: 90
   comment:
     needs: [prepare, plan]
-    if: github.event_name == 'workflow_run'
+    if: github.event_name == 'pull_request_target'
     permissions:
       contents: read
       pull-requests: write

@@ -50,7 +50,7 @@ jobs:
       - name: Check last commit
         id: skip-lint
         run: |
-          if [ "$(git log --oneline -n1)" == "*[skip lint]" ]; then
+          if [[ "$(git log --oneline -n1)" == *"[skip lint]" ]]; then
             echo "::set-output name=this::true"
           else
             echo "::set-output name=this::false"
