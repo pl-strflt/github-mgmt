@@ -20,7 +20,7 @@ jobs:
     name: Prepare
     runs-on: ubuntu-latest
     outputs:
-      skip-lint: ${{ steps.skip-lint.outputs.this }}
+      workspaces: ${{ steps.workspaces.outputs.this }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -38,80 +38,6 @@ jobs:
           else
             echo "::set-output name=this::false"
           fi
-  lint:
-    needs: [prepare]
-    if: needs.prepare.outputs.skip-lint == 'false'
-    permissions:
-      contents: read
-    name: Lint
-    runs-on: ubuntu-latest
-    env:
-      TF_IN_AUTOMATION: 1
-      TF_INPUT: 0
-      AWS_ACCESS_KEY_ID: ${{ secrets.RO_AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.RO_AWS_SECRET_ACCESS_KEY }}
-      GITHUB_APP_ID: ${{ secrets.RO_GITHUB_APP_ID }}
-      GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RO_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RO_GITHUB_APP_INSTALLATION_ID }}
-      GITHUB_APP_PEM_FILE: ${{ secrets.RO_GITHUB_APP_PEM_FILE }}
-      TF_VAR_write_delay_ms: 300
-    outputs:
-      github-modified: ${{ steps.github-modified.outputs.this }}
-    steps:
-      - name: Generate app token
-        id: token
-        uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5.1
-        with:
-          app_id: ${{ secrets.RW_GITHUB_APP_ID }}
-          installation_id: ${{ secrets[format('RW_GITHUB_APP_INSTALLATION_ID_{0}', github.repository_owner)] || secrets.RW_GITHUB_APP_INSTALLATION_ID }}
-          private_key: ${{ secrets.RW_GITHUB_APP_PEM_FILE }}
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          token: ${{ steps.token.outptus.token }}
-          path: head
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          path: base
-      - name: Setup terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: 1.1.4
-          terraform_wrapper: false
-      - name: Initialize terraform
-        run: terraform init
-        working-directory: head/terraform
-      - name: Initialize scripts
-        run: |
-          npm install
-          npm run build
-        working-directory: base/scripts
-      - name: Lint
-        run: |
-          while read workspace; do
-            terraform workspace select "$workspace"
-            TF_WORKSPACE="$workspace" node ../../base/scripts/lib/actions/*.js
-          done <<< "$(jq -r '.[]' <<< '${{ needs.prepare.outputs.workspaces || '[]' }}')"
-        working-directory: head/scripts
-      - name: Check if configs were modified
-        id: github-modified
-        run: |
-          if git diff-index --quiet HEAD -- github; then
-            echo "::set-output name=this::false"
-          else
-            echo "::set-output name=this::true"
-          fi
-        working-directory: head
-      - uses: ./.github/actions/git-config-user
-        if: steps.github-modified.outputs.this == 'true'
-      - if: steps.github-modified.outputs.this == 'true'
-        run: |
-          git add --all -- github
-          git commit -m "chore: lint [skip lint]"
-          git checkout -B ${{ github.event.pull_request.head.ref }}
-          git push origin ${{ github.event.pull_request.head.ref }}
   plan:
     needs: [prepare]
     permissions:
@@ -167,7 +93,7 @@ jobs:
           retention-days: 90
   comment:
     needs: [prepare, plan]
-    if: github.event_name == 'workflow_run'
+    if: github.event_name == 'pull_request_target'
     permissions:
       contents: read
       pull-requests: write
