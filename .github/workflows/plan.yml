@@ -1,75 +1,125 @@
 name: Plan
 
 on:
-  workflow_run:
-    workflows:
-      - "Plan (pre)"
-    types:
-      - completed
+  pull_request_target:
   workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: plan-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   prepare:
-    if: (github.event_name == 'workflow_dispatch' &&
-        github.ref_name == github.event.repository.default_branch) ||
-        (github.event_name == 'workflow_run' &&
-        github.event.workflow_run.conclusion == 'success')
     permissions:
       actions: read
       contents: read
-      statuses: write
     name: Prepare
     runs-on: ubuntu-latest
     outputs:
-      workspaces: ${{ steps.workspaces.outputs.this }}
-      sha: ${{ steps.github.outputs.sha }}
-      ref: ${{ steps.github.outputs.ref }}
-      number: ${{ steps.github.outputs.number }}
-    defaults:
-      run:
-        shell: bash
+      skip-lint: ${{ steps.skip-lint.outputs.this }}
     steps:
-      - name: Find repository and sha to checkout
-        id: github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [[ '${{ github.event_name }}' == 'workflow_dispatch' ]]; then
-            sha='${{ github.sha }}'
-            ref='${{ github.sha }}'
-          elif [[ '${{ github.event_name }}' == 'workflow_run' ]]; then
-            sha='${{ github.event.workflow_run.head_commit.id }}'
-            ref="$(gh api '/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/jobs' --jq '.jobs[] | .steps[] | .name | select(startswith("Run ref="))')"
-            ref="${ref#Run ref=}"
-            number="$(gh api '/repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/jobs' --jq '.jobs[] | .steps[] | .name | select(startswith("Run number="))')"
-            number="${number#Run number=}"
-          fi
-          echo "::set-output name=sha::$sha"
-          echo "::set-output name=ref::$ref"
-          echo "::set-output name=number::$number"
-      - run: sha=${{ steps.github.outputs.sha }}
-      - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh api 'repos/${{ github.repository }}/statuses/${{ steps.github.outputs.sha }}' -f context='Plan' -f state='pending' -f target_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: ${{ github.repository }}
-          ref: ${{ steps.github.outputs.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Discover workspaces
         id: workspaces
         run: echo "::set-output name=this::$(ls github | jq --raw-input '[.[0:-4]]' | jq -sc add)"
+      - name: Check last commit
+        id: skip-lint
+        run: |
+          if [ "$(git log --oneline -n1)" == "*[skip lint]" ]; then
+            echo "::set-output name=this::true"
+          else
+            echo "::set-output name=this::false"
+          fi
+  lint:
+    needs: [prepare]
+    if: needs.prepare.outputs.skip-lint == 'false'
+    permissions:
+      contents: read
+    name: Lint
+    runs-on: ubuntu-latest
+    env:
+      TF_IN_AUTOMATION: 1
+      TF_INPUT: 0
+      AWS_ACCESS_KEY_ID: ${{ secrets.RO_AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.RO_AWS_SECRET_ACCESS_KEY }}
+      GITHUB_APP_ID: ${{ secrets.RO_GITHUB_APP_ID }}
+      GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RO_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RO_GITHUB_APP_INSTALLATION_ID }}
+      GITHUB_APP_PEM_FILE: ${{ secrets.RO_GITHUB_APP_PEM_FILE }}
+      TF_VAR_write_delay_ms: 300
+    outputs:
+      github-modified: ${{ steps.github-modified.outputs.this }}
+    steps:
+      - name: Generate app token
+        id: token
+        uses: tibdex/github-app-token@7ce9ffdcdeb2ba82b01b51d6584a6a85872336d4 # v1.5.1
+        with:
+          app_id: ${{ secrets.RW_GITHUB_APP_ID }}
+          installation_id: ${{ secrets[format('RW_GITHUB_APP_INSTALLATION_ID_{0}', github.repository_owner)] || secrets.RW_GITHUB_APP_INSTALLATION_ID }}
+          private_key: ${{ secrets.RW_GITHUB_APP_PEM_FILE }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          token: ${{ steps.token.outptus.token }}
+          path: head
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: base
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.1.4
+          terraform_wrapper: false
+      - name: Initialize terraform
+        run: terraform init
+        working-directory: head/terraform
+      - name: Initialize scripts
+        run: |
+          npm install
+          npm run build
+        working-directory: base/scripts
+      - name: Lint
+        run: |
+          while read workspace; do
+            terraform workspace select "$workspace"
+            TF_WORKSPACE="$workspace" node ../../base/scripts/lib/actions/*.js
+          done <<< "$(jq -r '.[]' <<< '${{ needs.prepare.outputs.workspaces || '[]' }}')"
+        working-directory: head/scripts
+      - name: Check if configs were modified
+        id: github-modified
+        run: |
+          if git diff-index --quiet HEAD -- github; then
+            echo "::set-output name=this::false"
+          else
+            echo "::set-output name=this::true"
+          fi
+        working-directory: head
+      - uses: ./.github/actions/git-config-user
+        if: steps.github-modified.outputs.this == 'true'
+      - if: steps.github-modified.outputs.this == 'true'
+        run: |
+          git add --all -- github
+          git commit -m "chore: lint [skip lint]"
+          git checkout -B ${{ github.event.pull_request.head.ref }}
+          git push origin ${{ github.event.pull_request.head.ref }}
   plan:
     needs: [prepare]
-    if: needs.prepare.outputs.workspaces != ''
-    concurrency:
-      group: plan-${{ needs.prepare.outputs.number }}
     permissions:
       contents: read
     strategy:
       fail-fast: false
       matrix:
-        workspace: ${{ fromJson(needs.prepare.outputs.workspaces) }}
+        workspace: ${{ fromJson(needs.prepare.outputs.workspaces || '[]') }}
     name: Plan
     runs-on: ubuntu-latest
     env:
@@ -87,10 +137,11 @@ jobs:
         shell: bash
         working-directory: terraform
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          repository: ${{ github.repository }}
-          ref: ${{ needs.prepare.outputs.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@3d8debd658c92063839bc97da5c2427100420dec # v1.3.2
         with:
@@ -110,15 +161,13 @@ jobs:
       - name: Upload terraform plan
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ env.TF_WORKSPACE }}_${{ needs.prepare.outputs.sha }}.tfplan
+          name: ${{ env.TF_WORKSPACE }}_${{ github.event.pull_request.head.sha || github.sha }}.tfplan
           path: terraform/${{ env.TF_WORKSPACE }}.tfplan
           if-no-files-found: error
           retention-days: 90
   comment:
     needs: [prepare, plan]
     if: github.event_name == 'workflow_run'
-    concurrency:
-      group: comment-${{ needs.prepare.outputs.number }}
     permissions:
       contents: read
       pull-requests: write
@@ -132,10 +181,11 @@ jobs:
         shell: bash
         working-directory: terraform
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          repository: ${{ github.repository }}
-          ref: ${{ needs.prepare.outputs.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@3d8debd658c92063839bc97da5c2427100420dec # v1.3.2
         with:
@@ -171,7 +221,7 @@ jobs:
       - name: Comment on pull request
         uses: marocchino/sticky-pull-request-comment@39c5b5dc7717447d0cba270cd115037d32d28443 # v2.2.0
         with:
-          number: ${{ needs.prepare.outputs.number }}
+          number: ${{ github.event.pull_request.number }}
           message: |
             Before merge, verify that all the following plans are correct. They will be applied as-is after the merge.
 
