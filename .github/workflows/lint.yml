@@ -108,20 +108,24 @@ jobs:
       - name: Lint
         run: |
           while read workspace; do
+            pushd terraform
             terraform workspace select "$workspace"
+            popd
+            pushd scripts
             TF_WORKSPACE="$workspace" node ../../base/scripts/lib/actions/*.js
+            popd
           done <<< "$(jq -r '.[]' <<< '${{ needs.prepare.outputs.workspaces || '[]' }}')"
-        working-directory: head/scripts
+        working-directory: head
       - name: Check if configs were modified
         id: github-modified
         run: |
-          if git diff-index --quiet HEAD -- github; then
+          if [ -z "$(git status --porcelain -- github)" ]; then
             echo "::set-output name=this::false"
           else
             echo "::set-output name=this::true"
           fi
         working-directory: head
-      - uses: ./.github/actions/git-config-user
+      - uses: ./base/.github/actions/git-config-user
         if: steps.github-modified.outputs.this == 'true'
       - if: steps.github-modified.outputs.this == 'true'
         run: |
@@ -134,7 +138,7 @@ jobs:
           git push origin ${{ github.event.pull_request.head.ref }}
         working-directory: head
       - if: steps.github-modified.outputs.this == 'true' && github.event_name != 'pull_request_target'
-        uses: ./.github/actions/git-push
+        uses: ./base/.github/actions/git-push
         env:
           GITHUB_TOKEN: ${{ steps.token.outputs.token }}
         with:
