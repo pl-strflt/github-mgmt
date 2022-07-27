@@ -5,6 +5,25 @@ members:
     - galargh
     - laurentsenta
 repositories:
+  .github-from-galorgh:
+    allow_auto_merge: false
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    archived: false
+    auto_init: false
+    collaborators:
+      push:
+        - web3-bot
+    default_branch: master
+    delete_branch_on_merge: false
+    has_downloads: true
+    has_issues: false
+    has_projects: true
+    has_wiki: true
+    is_template: false
+    visibility: public
+    vulnerability_alerts: false
   github-action-releaser:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -13,7 +32,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     description: Release steps for github actions.
@@ -51,7 +76,7 @@ repositories:
           restrict_dismissals: false
         required_status_checks:
           contexts:
-            - Plan
+            - Comment
           strict: true
     collaborators:
       admin:
@@ -108,7 +133,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
@@ -129,7 +160,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
@@ -158,7 +195,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
@@ -179,7 +222,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
@@ -200,7 +249,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     has_downloads: true
