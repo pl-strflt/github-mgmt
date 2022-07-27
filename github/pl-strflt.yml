@@ -51,7 +51,7 @@ repositories:
           restrict_dismissals: false
         required_status_checks:
           contexts:
-            - Plan
+            - Plan / Comment
           strict: true
     collaborators:
       admin:
