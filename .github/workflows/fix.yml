@@ -47,7 +47,7 @@ jobs:
       - name: Check last commit
         id: skip-fix
         run: |
-          if [[ "$(git log --oneline -n1)" == *"[skip fix]" ]] || ! ls scripts/src/fix/rules/*.ts 2> /dev/null; then
+          if [[ "$(git log --format=%B -n 1 ${{ github.event.pull_request.head.sha || github.sha }} | head -n 1)" == *"[skip fix]" ]] || ! ls scripts/src/fix/rules/*.ts 2> /dev/null; then
             echo "::set-output name=this::true"
           else
             echo "::set-output name=this::false"
