@@ -12,6 +12,8 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    branch_protection:
+      master: {}
     collaborators:
       push:
         - web3-bot
