@@ -15,8 +15,8 @@ concurrency:
 jobs:
   prepare:
     permissions:
-      actions: read
       contents: read
+      pull-requests: read
     name: Prepare
     runs-on: ubuntu-latest
     outputs:
@@ -24,24 +24,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - if: github.event_name == 'pull_request_target'
+        run: |
+          git fetch origin pull/${{ github.event.pull_request.number }}/head
+          rm -rf github && git checkout ${{ github.event.pull_request.head.sha }} -- github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Discover workspaces
         id: workspaces
         run: echo "::set-output name=this::$(ls github | jq --raw-input '[.[0:-4]]' | jq -sc add)"
-      - name: Check last commit
-        id: skip-lint
-        run: |
-          if [ "$(git log --oneline -n1)" == "*[skip lint]" ]; then
-            echo "::set-output name=this::true"
-          else
-            echo "::set-output name=this::false"
-          fi
   plan:
     needs: [prepare]
     permissions:
       contents: read
+      pull-requests: read
     strategy:
       fail-fast: false
       matrix:
@@ -58,32 +54,25 @@ jobs:
       GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RO_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RO_GITHUB_APP_INSTALLATION_ID }}
       GITHUB_APP_PEM_FILE: ${{ secrets.RO_GITHUB_APP_PEM_FILE }}
       TF_VAR_write_delay_ms: 300
-    defaults:
-      run:
-        shell: bash
-        working-directory: terraform
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - if: github.event_name == 'pull_request_target'
+        run: |
+          git fetch origin pull/${{ github.event.pull_request.number }}/head
+          rm -rf github && git checkout ${{ github.event.pull_request.head.sha }} -- github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@3d8debd658c92063839bc97da5c2427100420dec # v1.3.2
         with:
           terraform_version: 1.1.4
       - name: Initialize terraform
         run: terraform init
-      - name: Check terraform lock
-        if: github.event_name == 'workflow_run'
-        run: git diff --exit-code .terraform.lock.hcl
-      - name: Format terraform
-        run: terraform fmt -check
-      - name: Validate terraform
-        run: terraform validate -no-color
+        working-directory: terraform
       - name: Plan terraform
-        id: plan
         run: terraform plan -refresh=false -lock=false -out=${{ env.TF_WORKSPACE }}.tfplan -no-color
+        working-directory: terraform
       - name: Upload terraform plan
         uses: actions/upload-artifact@v2
         with:
@@ -102,16 +91,15 @@ jobs:
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.RO_AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.RO_AWS_SECRET_ACCESS_KEY }}
-    defaults:
-      run:
-        shell: bash
-        working-directory: terraform
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+      - if: github.event_name == 'pull_request_target'
+        run: |
+          git fetch origin pull/${{ github.event.pull_request.number }}/head
+          rm -rf github && git checkout ${{ github.event.pull_request.head.sha }} -- github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Setup terraform
         uses: hashicorp/setup-terraform@3d8debd658c92063839bc97da5c2427100420dec # v1.3.2
         with:
@@ -119,6 +107,7 @@ jobs:
           terraform_wrapper: false
       - name: Initialize terraform
         run: terraform init
+        working-directory: terraform
       - name: Download terraform plans
         uses: actions/download-artifact@v2
         with:
@@ -135,6 +124,7 @@ jobs:
             echo '</details>' >> TERRAFORM_PLANS.md
           done
           cat TERRAFORM_PLANS.md
+        working-directory: terraform
       - name: Prepare comment
         run: |
           echo 'COMMENT<<EOF' >> $GITHUB_ENV
@@ -144,6 +134,7 @@ jobs:
             cat TERRAFORM_PLANS.md >> $GITHUB_ENV
           fi
           echo 'EOF' >> $GITHUB_ENV
+        working-directory: terraform
       - name: Comment on pull request
         uses: marocchino/sticky-pull-request-comment@39c5b5dc7717447d0cba270cd115037d32d28443 # v2.2.0
         with:
