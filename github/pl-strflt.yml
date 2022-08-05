@@ -94,12 +94,9 @@ repositories:
     files:
       CODEOWNERS:
         content: >
-          # galargh is responsible for GitHub Management maintenance
-          * @galargh
+          # galargh is responsible for GitHub Management maintenance * @galargh
 
-          # The org-admins team is responsible for triaging/reviewing configuration change requests
-          # TODO: uncomment once org-admins team exists
-          # /github/pl-strflt.yml @pl-strflt/org-admins
+          # The org-admins team is responsible for triaging/reviewing configuration change requests # TODO: uncomment once org-admins team exists # /github/pl-strflt.yml @pl-strflt/org-admins
         overwrite_on_create: false
       README.md:
         content: >
