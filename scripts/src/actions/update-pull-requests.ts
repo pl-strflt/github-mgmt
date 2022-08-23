@@ -1,13 +1,13 @@
 import {GitHub} from '../github'
+import {context} from '@actions/github'
 
-export async function updatePullRequests(context: any) {
+async function updatePullRequests() {
   const github = await GitHub.getGitHub()
 
-  const opts = github.client.pulls.list.endpoint.merge({
+  const pulls = await github.client.paginate(github.client.pulls.list, {
     ...context.repo,
     state: 'open'
   })
-  const pulls = await github.client.paginate(opts)
 
   for (const pull of pulls) {
     if (pull.draft) {
@@ -15,7 +15,7 @@ export async function updatePullRequests(context: any) {
       continue
     }
 
-    if (pull.user.type === 'Bot') {
+    if (pull.user?.type === 'Bot') {
       // skip bot pull requests
       continue
     }
@@ -31,8 +31,10 @@ export async function updatePullRequests(context: any) {
     }
 
     github.client.pulls.updateBranch({
-      ...pull.base.repo,
+      ...context.repo,
       pull_number: pull.number
     })
   }
 }
+
+updatePullRequests()
