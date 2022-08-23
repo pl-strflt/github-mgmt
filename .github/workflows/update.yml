@@ -31,5 +31,5 @@ jobs:
           GITHUB_APP_PEM_FILE: ${{ secrets.RW_GITHUB_APP_PEM_FILE }}
         with:
           script: |
-            const {updatePullRequests} = require('scripts/lib/actions/update-pull-requests.js')
+            const {updatePullRequests} = require('./scripts/lib/actions/update-pull-requests')
             await updatePullRequests(context)
