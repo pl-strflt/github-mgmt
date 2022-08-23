@@ -28,5 +28,5 @@ jobs:
           GITHUB_APP_ID: ${{ secrets.RW_GITHUB_APP_ID }}
           GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RW_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RW_GITHUB_APP_INSTALLATION_ID }}
           GITHUB_APP_PEM_FILE: ${{ secrets.RW_GITHUB_APP_PEM_FILE }}
-        run: node lib/update-pull-requests.js
+        run: node lib/actions/update-pull-requests.js
         working-directory: scripts
