@@ -10,7 +10,7 @@ async function updatePullRequests() {
   })
 
   for (const pull of pulls) {
-    if (pull.draft) {
+    if (pull.draft === true) {
       // skip draft pull requests
       continue
     }
@@ -20,7 +20,7 @@ async function updatePullRequests() {
       continue
     }
 
-    if (pull.base.ref !== context.ref) {
+    if (pull.base.ref !== (process.env.GITHUB_REF_NAME as string)) {
       // skip pull requests that are not on the target branch
       continue
     }
