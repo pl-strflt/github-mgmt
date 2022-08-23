@@ -24,12 +24,9 @@ jobs:
       - run: npm install && npm run build
         working-directory: scripts
       - name: Update PRs
-        uses: actions/github-script@v6
         env:
           GITHUB_APP_ID: ${{ secrets.RW_GITHUB_APP_ID }}
           GITHUB_APP_INSTALLATION_ID: ${{ secrets[format('RW_GITHUB_APP_INSTALLATION_ID_{0}', matrix.workspace)] || secrets.RW_GITHUB_APP_INSTALLATION_ID }}
           GITHUB_APP_PEM_FILE: ${{ secrets.RW_GITHUB_APP_PEM_FILE }}
-        with:
-          script: |
-            const {updatePullRequests} = require('./scripts/lib/actions/update-pull-requests')
-            await updatePullRequests(context)
+        run: node lib/update-pull-requests.js
+        working-directory: scripts
