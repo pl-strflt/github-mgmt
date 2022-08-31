@@ -20,6 +20,7 @@ async function updatePullRequests() {
       continue
     }
 
+    // replace process.env.GITHUB_REF_NAME with context.refName if it becomes available https://github.com/actions/toolkit/pull/935
     if (pull.base.ref !== (process.env.GITHUB_REF_NAME as string)) {
       // skip pull requests that are not on the target branch
       continue
