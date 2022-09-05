@@ -32,6 +32,25 @@ repositories:
     is_template: false
     visibility: public
     vulnerability_alerts: false
+  action-tmate:
+    allow_auto_merge: false
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    archived: false
+    auto_init: false
+    default_branch: master
+    delete_branch_on_merge: false
+    description: Debug your GitHub Actions via SSH by using tmate to get access to
+      the runner system itself.
+    has_downloads: true
+    has_issues: false
+    has_projects: true
+    has_wiki: true
+    homepage_url: https://mxschmitt.github.io/action-tmate/
+    is_template: false
+    visibility: public
+    vulnerability_alerts: false
   github-action-releaser:
     allow_auto_merge: false
     allow_merge_commit: true
