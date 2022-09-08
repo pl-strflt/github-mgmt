@@ -97,7 +97,7 @@ repositories:
           
           # The github-mgmt stewards team is responsible for triaging/reviewing configuration change requests
           # The ipdx team is added here temporarily to witness use patterns in github-mgmt
-          /github/ipfs.yml @pl-strflt/github-mgmt-stewards @pl-strflt/ipdx
+          /github/pl-strflt.yml @pl-strflt/github-mgmt-stewards @pl-strflt/ipdx
         overwrite_on_create: false
       README.md:
         content: >
