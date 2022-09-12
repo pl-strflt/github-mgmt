@@ -82,6 +82,7 @@ repositories:
     visibility: public
     vulnerability_alerts: false
   github-mgmt:
+    # WARN: push+ access here should be treated exactly as cautiosly as org admin role
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
@@ -105,15 +106,17 @@ repositories:
           contexts:
             - Comment
           strict: true
-    collaborators:
-      admin:
-        - galargh
     default_branch: master
     delete_branch_on_merge: true
     files:
       CODEOWNERS:
-        content: >
-          *       @galargh
+        content: |
+          # The ipdx team is responsible for GitHub Management maintenance
+          * @pl-strflt/ipdx
+
+          # The github-mgmt stewards team is responsible for triaging/reviewing configuration change requests
+          # The ipdx team is added here temporarily to witness use patterns in github-mgmt
+          /github/pl-strflt.yml @pl-strflt/github-mgmt-stewards @pl-strflt/ipdx
         overwrite_on_create: false
       README.md:
         content: >
@@ -143,10 +146,11 @@ repositories:
     has_wiki: false
     is_template: false
     teams:
+      # ATTN: do not add teams with push+ access, use github-mgmt stewards team membership instead
       maintain:
-        - w3dt-stewards
-      triage:
-        - ipdx
+        - ipdx # NOTE: ipdx are the creators of GitHub Management framework
+      push:
+        - github-mgmt stewards
     template:
       owner: protocol
       repository: github-mgmt-template
@@ -295,6 +299,20 @@ repositories:
     visibility: public
     vulnerability_alerts: false
 teams:
+  github-mgmt stewards:
+    # NOTE: created to capture users with push+ access to github-mgmt repository
+    #  using a team instead of direct collaborators because we want to reference it in the CODEOWNERS file
+    create_default_maintainer: false
+    description: Users that are effectively org admins
+    members:
+      # WARN: membership here should be treated exactly as cautiosly as having an org admin role
+      # ATTN: members are expected to:
+      #  - be familiar with GitHub Management
+      #  - be ready to triage/review org configuration change request in github-mgmt
+      maintainer:
+        - galargh
+        - laurentsenta
+    privacy: closed
   ipdx:
     members:
       maintainer:
