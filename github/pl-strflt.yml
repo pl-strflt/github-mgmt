@@ -39,6 +39,8 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    branch_protection:
+      master: {}
     default_branch: master
     delete_branch_on_merge: false
     description: Debug your GitHub Actions via SSH by using tmate to get access to
@@ -96,8 +98,6 @@ repositories:
         required_linear_history: false
         required_pull_request_reviews:
           dismiss_stale_reviews: false
-          dismissal_restrictions: []
-          pull_request_bypassers: []
           require_code_owner_reviews: false
           required_approving_review_count: 1
           restrict_dismissals: false
@@ -202,7 +202,6 @@ repositories:
     has_wiki: true
     is_template: false
     pages:
-      cname: ""
       source:
         branch: main
         path: /docs
