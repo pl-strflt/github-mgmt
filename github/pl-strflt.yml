@@ -40,7 +40,13 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      master: {}
+      master:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: master
     delete_branch_on_merge: false
     description: Debug your GitHub Actions via SSH by using tmate to get access to
@@ -79,6 +85,7 @@ repositories:
     teams:
       maintain:
         - ipdx
+        - test
     visibility: public
     vulnerability_alerts: false
   github-mgmt:
@@ -149,6 +156,7 @@ repositories:
       # ATTN: do not add teams with push+ access, use github-mgmt stewards team membership instead
       maintain:
         - ipdx # NOTE: ipdx are the creators of GitHub Management framework
+        - test
       push:
         - github-mgmt stewards
     template:
@@ -181,6 +189,7 @@ repositories:
     teams:
       admin:
         - ipdx
+        - test
     visibility: public
     vulnerability_alerts: false
   projects-migration:
@@ -212,6 +221,7 @@ repositories:
     teams:
       maintain:
         - ipdx
+        - test
     topics:
       - github
       - graphql
@@ -242,6 +252,7 @@ repositories:
     teams:
       maintain:
         - ipdx
+        - test
     visibility: public
     vulnerability_alerts: false
   rust-sccache-action:
@@ -269,6 +280,7 @@ repositories:
     teams:
       maintain:
         - ipdx
+        - test
     visibility: public
     vulnerability_alerts: true
   tf-aws-gh-runner:
@@ -296,6 +308,7 @@ repositories:
     teams:
       maintain:
         - ipdx
+        - test
     visibility: public
     vulnerability_alerts: false
 teams:
@@ -318,6 +331,8 @@ teams:
       maintainer:
         - galargh
         - laurentsenta
+    privacy: closed
+  test:
     privacy: closed
   w3dt-stewards:
     create_default_maintainer: false
