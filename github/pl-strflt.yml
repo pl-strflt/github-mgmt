@@ -333,6 +333,7 @@ teams:
         - laurentsenta
     privacy: closed
   test:
+    parent_team_id: ipdx
     privacy: closed
   w3dt-stewards:
     create_default_maintainer: false
