@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - plan: to be triggered on pull_request_target
 - plan: to only check out github directory from the PR
 - plan: to wait for Apply workflow runs to finish
+- defaults: not to ignore any properties by default
 
 ### Fixed
 - links to supported resources in HOWTOs
@@ -38,3 +39,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PR parsing in the update workflow
 - array head retrieval in scripts
 - team imports
+- parent_team_id retrieval from state
+- saving config sync result
