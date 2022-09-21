@@ -333,6 +333,9 @@ teams:
         - laurentsenta
     privacy: closed
   test:
+    members:
+      maintainer:
+        - galargh
     parent_team_id: ipdx
     privacy: closed
   w3dt-stewards:
