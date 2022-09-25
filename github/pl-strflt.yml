@@ -57,6 +57,8 @@ repositories:
     has_wiki: true
     homepage_url: https://mxschmitt.github.io/action-tmate/
     is_template: false
+    topics:
+      - ipdx
     visibility: public
     vulnerability_alerts: false
   github-action-releaser:
@@ -162,6 +164,8 @@ repositories:
     template:
       owner: protocol
       repository: github-mgmt-template
+    topics:
+      - ipdx
     visibility: public
     vulnerability_alerts: false
   ipdx:
@@ -225,6 +229,7 @@ repositories:
     topics:
       - github
       - graphql
+      - ipdx
     visibility: public
     vulnerability_alerts: false
   projects-status-history:
@@ -253,6 +258,8 @@ repositories:
       maintain:
         - ipdx
         - test
+    topics:
+      - ipdx
     visibility: public
     vulnerability_alerts: false
   rust-sccache-action:
@@ -281,6 +288,8 @@ repositories:
       maintain:
         - ipdx
         - test
+    topics:
+      - ipdx
     visibility: public
     vulnerability_alerts: true
   tf-aws-gh-runner:
@@ -309,6 +318,8 @@ repositories:
       maintain:
         - ipdx
         - test
+    topics:
+      - ipdx
     visibility: public
     vulnerability_alerts: false
 teams:
