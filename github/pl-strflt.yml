@@ -68,6 +68,8 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    branch_protection:
+      master: {}
     default_branch: master
     delete_branch_on_merge: false
     description: Apache Ant is a Java-based build tool.
@@ -317,6 +319,8 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    branch_protection:
+      master: {}
     default_branch: master
     delete_branch_on_merge: false
     description: Shell library to test your Unix tools like Git does
