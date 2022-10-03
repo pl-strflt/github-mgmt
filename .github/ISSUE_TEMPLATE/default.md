@@ -1,5 +1,5 @@
 ---
-name: GitHub Management Stewards Request
+name: GitHub Management Stewards Assistance Request
 about: Request assistance from this organization's GitHub Management Stewards team
 title: "[General] <request summary>"
 labels: ''
