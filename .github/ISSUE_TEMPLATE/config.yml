@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: PR
+    url: https://github.com/pl-strflt/github-mgmt/edit/master/github/pl-strflt.yml
+    about: Propose GitHub configuration change by modifying [pl-strflt.yml](https://github.com/pl-strflt/github-mgmt/blob/master/github/pl-strflt.yml)
