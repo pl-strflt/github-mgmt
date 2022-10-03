@@ -1,5 +1,5 @@
 blank_issues_enabled: true
 contact_links:
-  - name: PR
+  - name: Self-serve
     url: https://github.com/pl-strflt/github-mgmt/edit/master/github/pl-strflt.yml
     about: Propose GitHub configuration change by modifying pl-strflt.yml
