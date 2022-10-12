@@ -4,6 +4,7 @@ members:
   admin:
     - galargh
     - laurentsenta
+    - tinytb
 repositories:
   .github-from-galorgh:
     allow_auto_merge: false
@@ -394,6 +395,7 @@ teams:
       maintainer:
         - galargh
         - laurentsenta
+        - tinytb
     privacy: closed
   test:
     members:
@@ -407,4 +409,5 @@ teams:
       maintainer:
         - galargh
         - laurentsenta
+        - tinytb
     privacy: secret
