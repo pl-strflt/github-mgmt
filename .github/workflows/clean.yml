@@ -30,7 +30,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Discover workspaces
         id: workspaces
         env:
@@ -41,7 +41,7 @@ jobs:
           else
             workspaces="$(echo "${WORKSPACES}" | jq --raw-input 'split(" ")')"
           fi
-          echo "::set-output name=this::${workspaces}"
+          echo "this=${workspaces}" >> $GITHUB_OUTPUT
   clean:
     needs: [prepare]
     if: needs.prepare.outputs.workspaces != ''
@@ -69,7 +69,7 @@ jobs:
         shell: bash
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup terraform
         uses: hashicorp/setup-terraform@v1
         with:
