@@ -34,7 +34,7 @@ jobs:
           QUERY: repository:${{ github.repository }} ${{ github.sha }}
         uses: actions/github-script@v6
         with:
-          result_encoding: string
+          result-encoding: string
           script: |
             if (process.env.GITHUB_EVENT_NAME === 'push') {
               const { data: search } = await github.rest.search.issuesAndPullRequests({
