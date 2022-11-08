@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       workspaces: ${{ steps.workspaces.outputs.this }}
-      sha: ${{ steps.sha.outputs.this }}
+      sha: ${{ steps.sha.outputs.result }}
     defaults:
       run:
         shell: bash
