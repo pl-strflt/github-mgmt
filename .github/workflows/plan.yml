@@ -25,7 +25,7 @@ jobs:
       workspaces: ${{ steps.workspaces.outputs.this }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - if: github.event_name == 'pull_request_target'
         env:
           NUMBER: ${{ github.event.pull_request.number }}
@@ -37,7 +37,7 @@ jobs:
           rm -rf github && git checkout "${SHA}" -- github
       - name: Discover workspaces
         id: workspaces
-        run: echo "::set-output name=this::$(ls github | jq --raw-input '[.[0:-4]]' | jq -sc add)"
+        run: echo "this=$(ls github | jq --raw-input '[.[0:-4]]' | jq -sc add)" >> $GITHUB_OUTPUT
       - name: Wait for Apply to finish
         run: |
           while [[ "$(gh api /repos/${{ github.repository }}/actions/workflows/apply.yml/runs --jq '.workflow_runs | map(.status) | map(select(. != "completed")) | length')" != '0' ]]; do
@@ -70,7 +70,7 @@ jobs:
       TF_VAR_write_delay_ms: 300
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - if: github.event_name == 'pull_request_target'
         env:
           NUMBER: ${{ github.event.pull_request.number }}
@@ -109,7 +109,7 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.RO_AWS_SECRET_ACCESS_KEY }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - if: github.event_name == 'pull_request_target'
         env:
           NUMBER: ${{ github.event.pull_request.number }}
