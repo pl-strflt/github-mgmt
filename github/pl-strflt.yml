@@ -27,7 +27,10 @@ repositories:
     default_branch: master
     delete_branch_on_merge: false
     files:
-      README.md: {}
+      README.md:
+        content: |
+          hello, goodbye!
+        overwrite_on_create: false
     has_downloads: true
     has_issues: false
     has_projects: true
