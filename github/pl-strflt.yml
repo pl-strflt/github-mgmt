@@ -145,6 +145,8 @@ repositories:
     default_branch: master
     delete_branch_on_merge: true
     files:
+      CHANGELOG.md:
+        content: Hello world!
       CODEOWNERS:
         content: |
           # The ipdx team is responsible for GitHub Management maintenance
