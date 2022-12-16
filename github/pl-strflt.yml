@@ -5,6 +5,8 @@ members:
     - galargh
     - laurentsenta
     - tinytb
+  member:
+    - ianconsolata
 repositories:
   .github-from-galorgh:
     allow_auto_merge: false
