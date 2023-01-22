@@ -347,6 +347,23 @@ repositories:
       - ipdx
     visibility: public
     vulnerability_alerts: true
+  Saxon-HE:
+    allow_auto_merge: false
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    archived: false
+    auto_init: false
+    default_branch: main
+    delete_branch_on_merge: false
+    description: Saxon-HE open source repository
+    has_downloads: true
+    has_issues: false
+    has_projects: true
+    has_wiki: true
+    is_template: false
+    visibility: public
+    vulnerability_alerts: false
   sharness:
     allow_auto_merge: false
     allow_merge_commit: true
