@@ -477,8 +477,26 @@ repositories:
       - ipdx
     visibility: public
     vulnerability_alerts: false
+  validate-yaml-schema:
+    allow_auto_merge: false
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    archived: false
+    auto_init: false
+    default_branch: master
+    delete_branch_on_merge: false
+    description: A Github action for validating YAML based on VS Code settings
+    has_downloads: true
+    has_issues: false
+    has_projects: true
+    has_wiki: true
+    is_template: false
+    visibility: public
+    vulnerability_alerts: false
 teams:
   Alumni:
+    create_default_maintainer: false
     privacy: closed
   github-mgmt stewards:
     # NOTE: created to capture users with push+ access to github-mgmt repository
