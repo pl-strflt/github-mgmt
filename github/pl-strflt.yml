@@ -478,6 +478,8 @@ repositories:
     visibility: public
     vulnerability_alerts: false
 teams:
+  Alumni:
+    privacy: closed
   github-mgmt stewards:
     # NOTE: created to capture users with push+ access to github-mgmt repository
     #  using a team instead of direct collaborators because we want to reference it in the CODEOWNERS file
