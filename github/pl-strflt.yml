@@ -484,6 +484,8 @@ repositories:
     allow_squash_merge: true
     archived: false
     auto_init: false
+    branch_protection:
+      master: {}
     default_branch: master
     delete_branch_on_merge: false
     description: A Github action for validating YAML based on VS Code settings
