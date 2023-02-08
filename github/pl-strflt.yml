@@ -28,6 +28,10 @@ repositories:
     delete_branch_on_merge: false
     description: Debug your GitHub Actions via SSH by using tmate to get access to
       the runner system itself.
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: false
     has_projects: true
@@ -56,6 +60,10 @@ repositories:
     default_branch: master
     delete_branch_on_merge: false
     description: Apache Ant is a Java-based build tool.
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: false
     has_projects: true
@@ -82,6 +90,10 @@ repositories:
     default_branch: main
     delete_branch_on_merge: false
     description: Release steps for github actions.
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -121,6 +133,9 @@ repositories:
     default_branch: master
     delete_branch_on_merge: true
     files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
       CODEOWNERS:
         content: |
           # The ipdx team is responsible for GitHub Management maintenance
@@ -188,6 +203,10 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -218,6 +237,10 @@ repositories:
     delete_branch_on_merge: false
     description: An action which exports additional job related URLs as
       environmental variables
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -308,6 +331,10 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -339,6 +366,10 @@ repositories:
     default_branch: main
     delete_branch_on_merge: false
     description: Saxon-HE open source repository
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: false
     has_projects: true
@@ -364,6 +395,10 @@ repositories:
     default_branch: master
     delete_branch_on_merge: false
     description: Shell library to test your Unix tools like Git does
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: false
     has_projects: true
@@ -418,6 +453,10 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -442,6 +481,10 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -473,6 +516,10 @@ repositories:
     default_branch: master
     delete_branch_on_merge: false
     description: A Github action for validating YAML based on VS Code settings
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: true
     has_downloads: true
     has_issues: false
     has_projects: true
