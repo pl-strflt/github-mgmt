@@ -90,10 +90,6 @@ repositories:
     default_branch: main
     delete_branch_on_merge: false
     description: Release steps for github actions.
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -203,10 +199,6 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-        overwrite_on_create: true
     has_downloads: true
     has_issues: true
     has_projects: true
