@@ -4,5 +4,5 @@ import {format} from './shared/format'
 import {protectDefaultBranches} from './shared/protect-default-branches'
 
 protectDefaultBranches()
-addFileToAllRepos('.github/dependabot.yml')
+addFileToAllRepos('.github/dependabot.yml', '.github/dependabot.yml', r => !['ipdx', 'github-action-releaser'].includes(r.name))
 format()
