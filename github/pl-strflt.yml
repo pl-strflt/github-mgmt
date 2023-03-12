@@ -41,7 +41,7 @@ repositories:
     topics:
       - ipdx
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   ant:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -71,50 +71,8 @@ repositories:
     homepage_url: https://ant.apache.org/
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   changelog-driven-release:
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    archived: false
-    auto_init: false
-    branch_protection:
-      main: {}
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    visibility: public
-    vulnerability_alerts: true
-  docker-container-action:
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    archived: false
-    auto_init: false
-    branch_protection:
-      main: {}
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    visibility: public
-    vulnerability_alerts: true
-  github-action-releaser:
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
@@ -131,18 +89,45 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
-    description: Release steps for github actions.
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
-    teams:
-      maintain:
-        - ipdx
-        - test
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
+  docker-container-action:
+    allow_auto_merge: false
+    allow_merge_commit: true
+    allow_rebase_merge: true
+    allow_squash_merge: true
+    archived: false
+    auto_init: false
+    branch_protection:
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
+    default_branch: main
+    delete_branch_on_merge: false
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
+        overwrite_on_create: false
+    has_downloads: true
+    has_issues: true
+    has_projects: true
+    has_wiki: true
+    is_template: false
+    visibility: public
+    vulnerability_alerts: true
   github-mgmt:
     # WARN: push+ access here should be treated exactly as cautiosly as org admin role
     allow_auto_merge: false
@@ -223,7 +208,7 @@ repositories:
     topics:
       - ipdx
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   ipdx:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -251,7 +236,7 @@ repositories:
         - ipdx
         - test
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   job-summary-url-action:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -281,7 +266,7 @@ repositories:
     has_wiki: true
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   junit-xml-to-html:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -290,13 +275,20 @@ repositories:
     archived: false
     auto_init: false
     branch_protection:
-      main: {}
+      main:
+        allows_deletions: false
+        allows_force_pushes: false
+        enforce_admins: false
+        require_conversation_resolution: false
+        require_signed_commits: false
+        required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
     description: Convert jUnit XML to HTML
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
+        overwrite_on_create: false
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -432,7 +424,7 @@ repositories:
     has_wiki: true
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   sharness:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -462,7 +454,7 @@ repositories:
     homepage_url: http://chriscool.github.com/sharness
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   tf-aws-bootstrap:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -491,7 +483,7 @@ repositories:
     has_wiki: true
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   tf-aws-gh-observer:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -519,7 +511,7 @@ repositories:
     has_wiki: true
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   tf-aws-gh-runner:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -553,7 +545,7 @@ repositories:
     topics:
       - ipdx
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
   validate-yaml-schema:
     allow_auto_merge: false
     allow_merge_commit: true
@@ -582,7 +574,7 @@ repositories:
     has_wiki: true
     is_template: false
     visibility: public
-    vulnerability_alerts: false
+    vulnerability_alerts: true
 teams:
   Alumni:
     create_default_maintainer: false
