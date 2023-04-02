@@ -28,6 +28,9 @@ repositories:
     delete_branch_on_merge: false
     description: Debug your GitHub Actions via SSH by using tmate to get access to
       the runner system itself.
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
     has_downloads: true
     has_issues: false
     has_projects: true
