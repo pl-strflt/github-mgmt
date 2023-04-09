@@ -31,6 +31,7 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
+        overwrite_on_create: false
     has_downloads: true
     has_issues: false
     has_projects: true
@@ -427,7 +428,7 @@ repositories:
     branch_protection:
       main:
         allows_deletions: false
-        allows_force_pushes: false
+        allows_force_pushes: true
         enforce_admins: false
         require_conversation_resolution: false
         require_signed_commits: false
@@ -605,7 +606,7 @@ repositories:
     branch_protection:
       main:
         allows_deletions: false
-        allows_force_pushes: false
+        allows_force_pushes: true
         enforce_admins: false
         require_conversation_resolution: false
         require_signed_commits: false
