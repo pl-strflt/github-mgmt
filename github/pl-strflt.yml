@@ -372,7 +372,7 @@ repositories:
     labels:
       duplicate:
         color: cfd3d7
-        description: This issue or pull request already exists
+        description: This issue or pull request already exists 🙀
       💀 wontfix:
         color: fffffe
         description: This will not be worked on 💀
