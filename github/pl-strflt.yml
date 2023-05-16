@@ -10,17 +10,21 @@ members:
     - ianconsolata
 repositories:
   action-tmate:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       master:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -32,28 +36,39 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: false
     has_projects: true
     has_wiki: true
     homepage_url: https://mxschmitt.github.io/action-tmate/
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     topics:
       - ipdx
     visibility: public
     vulnerability_alerts: true
   ant:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       master:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -64,26 +79,37 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: false
     has_projects: true
     has_wiki: false
     homepage_url: https://ant.apache.org/
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   changelog-driven-release:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: true
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -93,25 +119,36 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   docker-container-action:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -121,26 +158,37 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   github-mgmt:
     # WARN: push+ access here should be treated exactly as cautiosly as org admin role
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: true
     archived: false
     auto_init: false
     branch_protection:
       master:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: true
         enforce_admins: false
+        lock_branch: false
         push_restrictions:
           - A_kwHOBh7Iyc4AAtXK
           - MDQ6VXNlcjY2ODgwNzQ=
@@ -194,11 +242,18 @@ repositories:
 
           - [How to work with GitHub Management?](docs/HOWTOS.md)
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: false
     has_wiki: false
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     teams:
       # ATTN: do not add teams with push+ access, use github-mgmt stewards team membership instead
       maintain:
@@ -214,17 +269,21 @@ repositories:
     visibility: public
     vulnerability_alerts: true
   gotest-json-to-junit-xml:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -234,35 +293,53 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   ipdx:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     teams:
       admin:
         - ipdx
@@ -270,17 +347,21 @@ repositories:
     visibility: public
     vulnerability_alerts: true
   job-summary-url-action:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -292,25 +373,36 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   junit-xml-to-html:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -321,30 +413,37 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   projects-migration:
-    allow_auto_merge: false
-    allow_merge_commit: false
-    allow_rebase_merge: false
-    allow_squash_merge: false
+    advanced_security: false
+    allow_update_branch: false
     archived: true
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
     default_branch: main
-    delete_branch_on_merge: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
@@ -354,6 +453,8 @@ repositories:
       source:
         branch: main
         path: /docs
+    secret_scanning_push_protection: false
+    secret_scanning: false
     teams:
       push:
         - ipdx
@@ -365,27 +466,29 @@ repositories:
     visibility: public
     vulnerability_alerts: false
   projects-status-history:
-    allow_auto_merge: false
-    allow_merge_commit: false
-    allow_rebase_merge: false
-    allow_squash_merge: false
+    advanced_security: false
+    allow_update_branch: false
     archived: true
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
     default_branch: main
-    delete_branch_on_merge: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    secret_scanning_push_protection: false
+    secret_scanning: false
     teams:
       maintain:
         - ipdx
@@ -395,17 +498,21 @@ repositories:
     visibility: public
     vulnerability_alerts: false
   rich-workflow-run:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -415,25 +522,36 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   rust-sccache-action:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: true
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -443,11 +561,18 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     teams:
       maintain:
         - ipdx
@@ -457,17 +582,21 @@ repositories:
     visibility: public
     vulnerability_alerts: true
   Saxon-HE:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -478,25 +607,36 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: false
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   saxon:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -506,25 +646,36 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   sharness:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       master:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -535,26 +686,37 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: false
     has_projects: true
     has_wiki: true
     homepage_url: http://chriscool.github.com/sharness
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   tf-aws-bootstrap:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -565,25 +727,36 @@ repositories:
         content: |
           # Empty
         overwrite_on_create: false
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   tf-aws-gh-observer:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -593,25 +766,36 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   tf-aws-gh-runner:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: false
     archived: false
     auto_init: false
     branch_protection:
       main:
         allows_deletions: false
         allows_force_pushes: true
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -621,11 +805,18 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: true
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     teams:
       maintain:
         - ipdx
@@ -635,17 +826,21 @@ repositories:
     visibility: public
     vulnerability_alerts: true
   validate-yaml-schema:
+    advanced_security: false
     allow_auto_merge: false
     allow_merge_commit: true
     allow_rebase_merge: true
     allow_squash_merge: true
+    allow_update_branch: true
     archived: false
     auto_init: false
     branch_protection:
       master:
         allows_deletions: false
         allows_force_pushes: false
+        blocks_creations: false
         enforce_admins: false
+        lock_branch: false
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
@@ -656,11 +851,18 @@ repositories:
       .github/dependabot.yml:
         content: .github/dependabot.yml
         overwrite_on_create: true
+    has_discussions: false
     has_downloads: true
     has_issues: false
     has_projects: true
     has_wiki: true
     is_template: false
+    merge_commit_message: PR_TITLE
+    merge_commit_title: MERGE_MESSAGE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    squash_merge_commit_message: COMMIT_MESSAGES
+    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
 teams:
