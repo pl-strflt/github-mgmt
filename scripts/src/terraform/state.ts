@@ -22,7 +22,7 @@ export async function loadState() {
           source += data.toString()
         }
       },
-      silent: true
+      silent: false
     })
   } else {
     source = fs
