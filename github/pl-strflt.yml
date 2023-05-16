@@ -141,6 +141,10 @@ repositories:
         allows_deletions: false
         allows_force_pushes: false
         enforce_admins: false
+        push_restrictions:
+          - A_kwHOBh7Iyc4AAtXK
+          - MDQ6VXNlcjY2ODgwNzQ=
+          - T_kwDOBh7Iyc4AZMC6
         require_conversation_resolution: false
         require_signed_commits: false
         required_linear_history: false
