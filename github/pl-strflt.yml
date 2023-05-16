@@ -370,12 +370,12 @@ repositories:
     has_wiki: false
     is_template: false
     labels:
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists 🙀
       💀 wontfix:
         color: fffffe
         description: This will not be worked on 💀
+      duplicate:
+        color: cfd3d7
+        description: This issue or pull request already exists 🙀
       test 🧪:
         color: e123a2
         description: This issue or pull request relates to tests only
