@@ -365,17 +365,14 @@ repositories:
     labels:
       a:
         color: fef2c0
-      b:
-        color: 14BCFD
-        description: B
       c:
         color: "9E1063"
+        description: C
       d:
-        color: B7C10C
         description: D
       e:
-        color: 1F0D5D
-      f:
+        color: ffffff
+      F:
         color: 64DCB8
         description: F
       g:
