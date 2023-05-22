@@ -365,12 +365,9 @@ repositories:
     labels:
       a:
         color: fef2c0
-      d:
-        color: fefefe
-        description: D
       e:
         color: ffffff
-        description: E
+        description: e
       f:
         color: 64DCB8
         description: f
