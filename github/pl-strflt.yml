@@ -363,14 +363,16 @@ repositories:
     has_wiki: false
     is_template: false
     labels:
+      💀 wontfix:
+        color: ffffff
       Completely new:
         color: D262B9
       duplicate:
         color: cfd3d7
         description: This issue or pull request already exists
       test 🧪:
-        color: e123a2
-        description: This issue or pull request relates to tests only
+        color: e123a0
+        description: This pull request relates to tests only
       test test:
         color: e123a2
         description: This issue or pull request relates to tests only
