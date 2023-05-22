@@ -134,10 +134,8 @@ export class Config {
     const newValue = resourceToPlain(resource)
     const oldValue = resourceToPlain(oldResource)
     const diffs = diff(oldValue, newValue)
-    console.log('Adding resource...', {oldValue, newValue, path})
     for (const d of diffs || []) {
       if (d.kind === 'N') {
-        console.log('Diff...', d)
         this._document.addIn(
           path.extend(...(d.path || [])).toYAML(),
           yamlify(d.rhs)
@@ -199,16 +197,7 @@ export class Config {
   removeResource<T extends Resource>(resource: T): void {
     if (this.someResource(resource)) {
       const path = resource.getSchemaPath(this.get())
-      const plain = resourceToPlain(resource)
-      if (path.isUnique()) {
-        this._document.deleteIn(path.get())
-      } else if (typeof plain === 'object') {
-        for (const key of Object.keys(plain)) {
-          this._document.deleteIn(path.extend(key).get())
-        }
-      } else {
-        throw new Error(`Cannot remove ${resource.constructor.name}`)
-      }
+      this._document.deleteIn(path.get())
     }
   }
 
