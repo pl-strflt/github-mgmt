@@ -35,7 +35,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: false
@@ -109,7 +108,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: false
@@ -177,7 +175,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -247,7 +244,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -331,7 +327,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
       CODEOWNERS:
         content: |
           # The ipdx team is responsible for GitHub Management maintenance
@@ -340,7 +335,6 @@ repositories:
           # The github-mgmt stewards team is responsible for triaging/reviewing configuration change requests
           # The ipdx team is added here temporarily to witness use patterns in github-mgmt
           /github/pl-strflt.yml @pl-strflt/github-mgmt-stewards @pl-strflt/ipdx
-        overwrite_on_create: false
       README.md:
         content: >
           # GitHub Management via Terraform: pl-strflt
@@ -362,7 +356,6 @@ repositories:
           - [How to set up GitHub Management?](docs/SETUP.md)
 
           - [How to work with GitHub Management?](docs/HOWTOS.md)
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -370,9 +363,8 @@ repositories:
     has_wiki: false
     is_template: false
     labels:
-      💀 wontfix:
-        color: fffffe
-        description: This will not be worked on
+      Completely new:
+        color: D262B9
       duplicate:
         color: cfd3d7
         description: This issue or pull request already exists
@@ -381,7 +373,7 @@ repositories:
         description: This issue or pull request relates to tests only
       test test:
         color: e123a2
-        description: Test
+        description: This issue or pull request relates to tests only
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
     secret_scanning_push_protection: false
@@ -426,7 +418,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -568,7 +559,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -639,7 +629,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -853,7 +842,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -923,7 +911,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -994,7 +981,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: false
@@ -1061,7 +1047,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -1132,7 +1117,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: false
@@ -1201,7 +1185,6 @@ repositories:
       .github/dependabot.yml:
         content: |
           # Empty
-        overwrite_on_create: false
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -1268,7 +1251,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -1341,7 +1323,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -1415,7 +1396,6 @@ repositories:
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
-        overwrite_on_create: true
     has_discussions: false
     has_downloads: true
     has_issues: false
