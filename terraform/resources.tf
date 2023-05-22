@@ -286,8 +286,8 @@ resource "github_issue_labels" "this" {
     for_each = lookup(each.value, "labels", {})
     content {
       name        = label.key
-      color       = try(label.value.color, null)
-      description = try(label.value.description, null)
+      color       = label.value.color
+      description = try(label.value.description, "")
     }
   }
 
