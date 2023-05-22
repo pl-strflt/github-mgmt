@@ -363,6 +363,8 @@ repositories:
     has_wiki: false
     is_template: false
     labels:
+      💀 wontfix:
+        color: ffffff
       Completely new:
         color: D262B9
       duplicate:
@@ -374,8 +376,6 @@ repositories:
       test test:
         color: e123a2
         description: This issue or pull request relates to tests only
-      💀 wontfix:
-        color: ffffff
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
     secret_scanning_push_protection: false
