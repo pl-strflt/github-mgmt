@@ -369,6 +369,7 @@ repositories:
         color: "9E1063"
         description: C
       d:
+        color: fef2c0
         description: D
       e:
         color: ffffff
