@@ -381,7 +381,7 @@ repositories:
         description: This issue or pull request relates to tests only
       test test:
         color: e123a2
-        description: This issue or pull request relates to tests only
+        description: Test
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
     secret_scanning_push_protection: false
