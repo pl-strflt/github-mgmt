@@ -365,18 +365,18 @@ repositories:
     labels:
       a:
         color: fef2c0
-      c:
-        color: "9E1063"
-        description: C
       d:
-        color: fef2c0
+        color: fefefe
         description: D
       e:
         color: ffffff
-      F:
+        description: E
+      f:
         color: 64DCB8
-        description: F
+        description: f
       g:
+        color: E323D9
+      h:
         color: E323D9
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
