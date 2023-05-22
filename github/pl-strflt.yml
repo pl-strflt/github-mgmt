@@ -374,10 +374,9 @@ repositories:
       f:
         color: 64DCB8
         description: f
-      g:
-        color: E323D9
       h:
         color: E323D9
+        description: H
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
     secret_scanning_push_protection: false
