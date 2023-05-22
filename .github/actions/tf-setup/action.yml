@@ -17,7 +17,7 @@ inputs:
   version:
     description: TF GitHub Provider version
     required: false
-    default: '5.25.2-rc2'
+    default: '5.25.2-rc3'
 
 runs:
   using: composite
