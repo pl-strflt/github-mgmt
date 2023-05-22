@@ -31,10 +31,10 @@ runs:
       env:
         VERSION: ${{ inputs.version }}
       run: |
-        curl -LO https://github.com/galargh/terraform-provider-github/releases/download/v$VERSION/terraform-provider-github_$VERSION_linux_amd64.zip
-        mkdir -p ~/.terraform.d/plugins/registry.terraform.io/integrations/github/$VERSION/linux_amd64/
-        unzip terraform-provider-github_$VERSION_linux_amd64.zip -d ~/.terraform.d/plugins/registry.terraform.io/integrations/github/$VERSION/linux_amd64/
-        rm terraform-provider-github_$VERSION_linux_amd64.zip
+        curl -LO https://github.com/galargh/terraform-provider-github/releases/download/v${VERSION}/terraform-provider-github_${VERSION}_linux_amd64.zip
+        mkdir -p ~/.terraform.d/plugins/registry.terraform.io/integrations/github/${VERSION}/linux_amd64/
+        unzip terraform-provider-github_${VERSION}_linux_amd64.zip -d ~/.terraform.d/plugins/registry.terraform.io/integrations/github/${VERSION}/linux_amd64/
+        rm terraform-provider-github_${VERSION}_linux_amd64.zip
       shell: bash
       working-directory: ${{ inputs.working-directory }}
     - name: Init Terraform
