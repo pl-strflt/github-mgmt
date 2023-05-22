@@ -363,8 +363,6 @@ repositories:
     has_wiki: false
     is_template: false
     labels:
-      wontfix:
-        color: ffffff
       completely new:
         color: D262B9
       test 🧪:
@@ -373,6 +371,8 @@ repositories:
       test test:
         color: e123a2
         description: This issue relates to tests only
+      wontfix:
+        color: ffffff
       xyz:
         color: e123a2
         description: TEST
