@@ -134,8 +134,10 @@ export class Config {
     const newValue = resourceToPlain(resource)
     const oldValue = resourceToPlain(oldResource)
     const diffs = diff(oldValue, newValue)
+    console.log('Adding resource...', {oldValue, newValue, path})
     for (const d of diffs || []) {
       if (d.kind === 'N') {
+        console.log('Diff...', d)
         this._document.addIn(
           path.extend(...(d.path || [])).toYAML(),
           yamlify(d.rhs)
