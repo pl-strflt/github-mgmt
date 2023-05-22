@@ -363,7 +363,7 @@ repositories:
     has_wiki: false
     is_template: false
     labels:
-      💀 wontfix:
+      wontfix:
         color: ffffff
       completely new:
         color: D262B9
@@ -373,6 +373,9 @@ repositories:
       test test:
         color: e123a2
         description: This issue relates to tests only
+      xyz:
+        color: e123a2
+        description: TEST
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
     secret_scanning_push_protection: false
