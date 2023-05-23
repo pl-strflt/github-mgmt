@@ -364,12 +364,16 @@ repositories:
     is_template: false
     labels:
       a:
+        color: 7B42BC
         description: a
       E:
+        color: 7B42BC
         description: e
       fake:
+        color: 7B42BC
         description: f
       high:
+        color: 7B42BC
         description: h
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
