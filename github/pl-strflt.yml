@@ -9,6 +9,11 @@ members:
   member:
     - ianconsolata
 repositories:
+  aa:
+    auto_init: true
+  ab:
+    auto_init: true
+    visibility: private
   action-tmate:
     advanced_security: false
     allow_auto_merge: false
