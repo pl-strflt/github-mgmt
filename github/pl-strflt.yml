@@ -11,8 +11,17 @@ members:
 repositories:
   aa:
     auto_init: true
+    branch_protection:
+      main:
+        {}
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
   ab:
     auto_init: true
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
     visibility: private
   action-tmate:
     advanced_security: false
