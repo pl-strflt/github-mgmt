@@ -1249,6 +1249,7 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    description: Holistic Monitoring for GitHub Actions
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
@@ -1321,6 +1322,7 @@ repositories:
         required_linear_history: false
     default_branch: main
     delete_branch_on_merge: false
+    description: Customizable Self-hosted GitHub Runners
     files:
       .github/dependabot.yml:
         content: .github/dependabot.yml
