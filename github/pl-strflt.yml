@@ -18,8 +18,14 @@ repositories:
     allow_update_branch: false
     archived: false
     auto_init: false
+    branch_protection:
+      main:
+        {}
     default_branch: main
     delete_branch_on_merge: false
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
     has_discussions: false
     has_downloads: true
     has_issues: true
