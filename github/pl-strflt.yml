@@ -435,6 +435,9 @@ repositories:
       a:
         color: 7B42BC
         description: a
+      dependencies:
+        color: 0366d6
+        description: Pull requests that update a dependency file
       E:
         color: 7B42BC
         description: e
@@ -444,6 +447,9 @@ repositories:
       high:
         color: 7B42BC
         description: h
+      javascript:
+        color: "168700"
+        description: Pull requests that update Javascript code
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
     secret_scanning_push_protection: true
