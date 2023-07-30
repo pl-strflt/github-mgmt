@@ -161,9 +161,15 @@ repositories:
     allow_update_branch: false
     archived: false
     auto_init: false
+    branch_protection:
+      main:
+        {}
     default_branch: main
     delete_branch_on_merge: false
     description: ⁂ Github Action to upload files to web3.storage
+    files:
+      .github/dependabot.yml:
+        content: .github/dependabot.yml
     has_discussions: false
     has_downloads: true
     has_issues: false
@@ -200,8 +206,8 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: false
-    secret_scanning: false
+    secret_scanning_push_protection: true
+    secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
