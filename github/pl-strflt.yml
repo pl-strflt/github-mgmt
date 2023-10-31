@@ -5,9 +5,11 @@ members:
     - galargh
     - kasteph
     - laurentsenta
-    - tinytb
   member:
+    - achingbrain
     - ianconsolata
+    - marten-seemann
+    - tinytb
 repositories:
   .github:
     advanced_security: false
@@ -1747,6 +1749,9 @@ repositories:
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
+    teams:
+      push:
+        - w3dt-stewards
     visibility: public
     vulnerability_alerts: false
   validate-yaml-schema:
@@ -1855,5 +1860,7 @@ teams:
       maintainer:
         - galargh
         - laurentsenta
-        - tinytb
+      member:
+        - achingbrain
+        - marten-seemann
     privacy: secret
