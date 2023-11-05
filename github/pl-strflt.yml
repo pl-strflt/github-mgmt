@@ -9,7 +9,6 @@ members:
     - achingbrain
     - ianconsolata
     - marten-seemann
-    - tinytb
 repositories:
   .github:
     advanced_security: false
