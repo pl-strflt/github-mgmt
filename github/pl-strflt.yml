@@ -3,11 +3,11 @@
 members:
   admin:
     - galargh
-    - kasteph
-    - laurentsenta
   member:
     - achingbrain
     - ianconsolata
+    - kasteph
+    - laurentsenta
     - marten-seemann
 repositories:
   .github:
@@ -17,7 +17,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       main:
@@ -73,12 +73,12 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
+    secret_scanning_push_protection: false
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
-    vulnerability_alerts: true
+    vulnerability_alerts: false
   action-tmate:
     advanced_security: false
     allow_auto_merge: false
@@ -86,7 +86,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       master:
@@ -145,14 +145,14 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
+    secret_scanning_push_protection: false
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
     topics:
       - ipdx
     visibility: public
-    vulnerability_alerts: true
+    vulnerability_alerts: false
   add-to-web3:
     advanced_security: false
     allow_auto_merge: false
@@ -160,7 +160,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       main:
@@ -223,104 +223,21 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
+    secret_scanning_push_protection: false
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: false
-  ant:
+  cache-go-action:
     advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
-    branch_protection:
-      master:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
+    collaborators:
+      admin:
+        - galargh
     default_branch: master
-    delete_branch_on_merge: false
-    description: Apache Ant is a Java-based build tool.
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: false
-    has_projects: true
-    has_wiki: false
-    homepage_url: https://ant.apache.org/
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  changelog-driven-release:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: true
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: true
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
     has_discussions: false
     has_downloads: true
     has_issues: true
@@ -331,9 +248,6 @@ repositories:
       bug:
         color: d73a4a
         description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
       documentation:
         color: 0075ca
         description: Improvements or additions to documentation
@@ -358,83 +272,16 @@ repositories:
       wontfix:
         color: ffffff
         description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
+    secret_scanning_push_protection: false
+    secret_scanning: false
+    teams:
+      pull:
+        - ipdx
+        - test
+    topics:
+      - ipdx
     visibility: public
-    vulnerability_alerts: true
-  docker-container-action:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
+    vulnerability_alerts: false
   github-mgmt:
     # WARN: push+ access here should be treated exactly as cautiosly as org admin role
     advanced_security: false
@@ -483,6 +330,15 @@ repositories:
           /github/pl-strflt.yml @pl-strflt/github-mgmt-stewards @pl-strflt/ipdx
       README.md:
         content: >
+          > [!WARNING]  
+
+          > IPDX is no longer part of Protocol Labs.
+
+          >
+
+          > You can follow all future development of projects associated with IPDX at [@ipdxco](https://github.com/ipdxco).
+
+
           # GitHub Management via Terraform: pl-strflt
 
 
@@ -544,79 +400,10 @@ repositories:
       push:
         - github-mgmt stewards
     template:
-      owner: protocol
-      repository: github-mgmt-template
+      owner: ipdxco
+      repository: github-as-code
     topics:
       - ipdx
-    visibility: public
-    vulnerability_alerts: true
-  gotest-json-to-junit-xml:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
     vulnerability_alerts: true
   ipdx-slack-app:
@@ -626,7 +413,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       main:
@@ -679,12 +466,12 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
+    secret_scanning_push_protection: false
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
     visibility: public
-    vulnerability_alerts: true
+    vulnerability_alerts: false
   ipdx:
     advanced_security: false
     allow_auto_merge: false
@@ -692,7 +479,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       main:
@@ -754,217 +541,7 @@ repositories:
         - ipdx
         - test
     visibility: public
-    vulnerability_alerts: true
-  iptoasn:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  job-summary-url-action:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    description: An action which exports additional job related URLs as
-      environmental variables
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  junit-xml-to-html:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    description: Convert jUnit XML to HTML
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
+    vulnerability_alerts: false
   projects-migration:
     advanced_security: false
     allow_auto_merge: false
@@ -1109,75 +686,6 @@ repositories:
       - ipdx
     visibility: public
     vulnerability_alerts: false
-  rich-workflow-run:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
   rust-sccache-action:
     advanced_security: false
     allow_auto_merge: false
@@ -1185,7 +693,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       main:
@@ -1235,7 +743,7 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
+    secret_scanning_push_protection: false
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
@@ -1246,211 +754,7 @@ repositories:
     topics:
       - ipdx
     visibility: public
-    vulnerability_alerts: true
-  Saxon-HE:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    description: Saxon-HE open source repository
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: false
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  saxon:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  sharness:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      master:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: master
-    delete_branch_on_merge: false
-    description: Shell library to test your Unix tools like Git does
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: false
-    has_projects: true
-    has_wiki: true
-    homepage_url: http://chriscool.github.com/sharness
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
+    vulnerability_alerts: false
   tf-aws-bootstrap:
     advanced_security: false
     allow_auto_merge: false
@@ -1458,7 +762,7 @@ repositories:
     allow_rebase_merge: true
     allow_squash_merge: true
     allow_update_branch: false
-    archived: false
+    archived: true
     auto_init: false
     branch_protection:
       main:
@@ -1512,317 +816,12 @@ repositories:
         description: This will not be worked on
     merge_commit_message: PR_TITLE
     merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
+    secret_scanning_push_protection: false
     secret_scanning: true
     squash_merge_commit_message: COMMIT_MESSAGES
     squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  tf-aws-gh-observer:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    description: Holistic Monitoring for GitHub Actions
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      javascript:
-        color: "168700"
-        description: Pull requests that update Javascript code
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
-  tf-aws-gh-runner:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: true
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: main
-    delete_branch_on_merge: false
-    description: Customizable Self-hosted GitHub Runners
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    teams:
-      maintain:
-        - ipdx
-        - test
-    topics:
-      - ipdx
-    visibility: public
-    vulnerability_alerts: true
-  uci:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: false
-    archived: false
-    auto_init: false
-    branch_protection:
-      main:
-        allows_deletions: false
-        allows_force_pushes: true
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-        required_pull_request_reviews:
-          dismiss_stale_reviews: false
-          require_code_owner_reviews: false
-          required_approving_review_count: 0
-          restrict_dismissals: false
-      release/*:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-        required_pull_request_reviews:
-          dismiss_stale_reviews: false
-          require_code_owner_reviews: false
-          required_approving_review_count: 0
-          restrict_dismissals: false
-    default_branch: main
-    delete_branch_on_merge: false
-    description: Automatically distribute GitHub Actions workflow across repositories.
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: true
-    has_projects: false
-    has_wiki: false
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    teams:
-      push:
-        - w3dt-stewards
     visibility: public
     vulnerability_alerts: false
-  validate-yaml-schema:
-    advanced_security: false
-    allow_auto_merge: false
-    allow_merge_commit: true
-    allow_rebase_merge: true
-    allow_squash_merge: true
-    allow_update_branch: true
-    archived: false
-    auto_init: false
-    branch_protection:
-      master:
-        allows_deletions: false
-        allows_force_pushes: false
-        blocks_creations: false
-        enforce_admins: false
-        lock_branch: false
-        require_conversation_resolution: false
-        require_signed_commits: false
-        required_linear_history: false
-    default_branch: master
-    delete_branch_on_merge: false
-    description: A Github action for validating YAML based on VS Code settings
-    files:
-      .github/dependabot.yml:
-        content: .github/dependabot.yml
-    has_discussions: false
-    has_downloads: true
-    has_issues: false
-    has_projects: true
-    has_wiki: true
-    is_template: false
-    labels:
-      bug:
-        color: d73a4a
-        description: Something isn't working
-      dependencies:
-        color: 0366d6
-        description: Pull requests that update a dependency file
-      documentation:
-        color: 0075ca
-        description: Improvements or additions to documentation
-      duplicate:
-        color: cfd3d7
-        description: This issue or pull request already exists
-      enhancement:
-        color: a2eeef
-        description: New feature or request
-      good first issue:
-        color: 7057ff
-        description: Good for newcomers
-      help wanted:
-        color: "008672"
-        description: Extra attention is needed
-      invalid:
-        color: e4e669
-        description: This doesn't seem right
-      question:
-        color: d876e3
-        description: Further information is requested
-      wontfix:
-        color: ffffff
-        description: This will not be worked on
-    merge_commit_message: PR_TITLE
-    merge_commit_title: MERGE_MESSAGE
-    secret_scanning_push_protection: true
-    secret_scanning: true
-    squash_merge_commit_message: COMMIT_MESSAGES
-    squash_merge_commit_title: COMMIT_OR_PR_TITLE
-    visibility: public
-    vulnerability_alerts: true
 teams:
   Alumni:
     create_default_maintainer: false
@@ -1839,12 +838,14 @@ teams:
       #  - be ready to triage/review org configuration change request in github-mgmt
       maintainer:
         - galargh
+      member:
         - laurentsenta
     privacy: closed
   ipdx:
     members:
       maintainer:
         - galargh
+      member:
         - laurentsenta
     privacy: closed
   test:
@@ -1858,8 +859,8 @@ teams:
     members:
       maintainer:
         - galargh
-        - laurentsenta
       member:
         - achingbrain
+        - laurentsenta
         - marten-seemann
     privacy: secret
