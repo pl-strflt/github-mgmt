@@ -120,7 +120,7 @@ jobs:
         with:
           wrapper: false
       - name: Download terraform plans
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: terraform
       - name: Show terraform plans
